@@ -1,0 +1,2370 @@
+/**
+ * ARIAE - Estilos Generales Inspirados en Samsung Latinoamérica (samsung.com/latin)
+ * Diseño Minimalista, Tipografía Refinada, Bordes Suaves y Alta Tecnología
+ */
+
+:root {
+  --samsung-blue: #0057b8;
+  --samsung-blue-hover: #00438f;
+  --samsung-blue-electric: #1259ff;
+  --samsung-cyan: #00c6ff;
+  --samsung-black: #000000;
+  --samsung-dark: #111317;
+  --samsung-dark-card: #1c2029;
+  --samsung-dark-border: #2a3140;
+  --samsung-surface: #f7f9fc;
+  --samsung-card: #ffffff;
+  --samsung-border: #e4e7ec;
+  --samsung-border-focus: #0057b8;
+  --samsung-text-main: #14171f;
+  --samsung-text-secondary: #586274;
+  --samsung-text-muted: #8c96a8;
+
+  --status-pending: #f59e0b;
+  --status-in-review: #0070f3;
+  --status-resolved: #10b981;
+  --status-critical: #ef4444;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-glow-blue: 0 0 25px rgba(0, 87, 184, 0.25);
+  
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset & Typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--samsung-text-main);
+  background-color: var(--samsung-surface);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--samsung-black);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Helpers */
+.bg-surface { background-color: var(--samsung-surface); }
+.bg-white { background-color: #ffffff; }
+.text-main { color: var(--samsung-text-main); }
+.text-blue { color: var(--samsung-blue); }
+.text-white { color: #ffffff; }
+.font-bold { font-weight: 700; }
+.w-full { width: 100%; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mb-2 { margin-bottom: 0.5rem; }
+
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-padding {
+  padding: 80px 0;
+}
+
+.icon-inline {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* =========================================================
+   SAMSUNG BUTTONS
+   ========================================================= */
+.samsung-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: var(--transition);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.samsung-btn:hover {
+  transform: translateY(-2px);
+}
+
+.samsung-btn:active {
+  transform: translateY(0);
+}
+
+.samsung-btn-primary {
+  background-color: var(--samsung-black);
+  color: #ffffff;
+}
+
+.samsung-btn-primary:hover {
+  background-color: #262626;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.samsung-btn-outline {
+  background-color: transparent;
+  color: var(--samsung-black);
+  border: 1.5px solid var(--samsung-border);
+}
+
+.samsung-btn-outline:hover {
+  border-color: var(--samsung-black);
+  background-color: #f4f4f5;
+}
+
+.samsung-btn-outline-white {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+
+.samsung-btn-outline-white:hover {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.samsung-btn-white {
+  background-color: #ffffff;
+  color: var(--samsung-black);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--samsung-border);
+}
+
+.samsung-btn-white:hover {
+  background-color: #f8fafc;
+  box-shadow: var(--shadow-md);
+}
+
+.samsung-btn-lg {
+  padding: 14px 28px;
+  font-size: 0.95rem;
+}
+
+.btn-sm {
+  padding: 7px 15px;
+  font-size: 0.8rem;
+}
+
+/* =========================================================
+   TOP ANNOUNCEMENT BAR
+   ========================================================= */
+.top-announcement-bar {
+  background-color: #0b0c0e;
+  color: #e2e8f0;
+  padding: 8px 16px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.announcement-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.badge-pill-micro {
+  background-color: var(--samsung-blue);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.06em;
+}
+
+.announcement-text strong {
+  color: #ffffff;
+}
+
+.announcement-link {
+  color: #93c5fd;
+  text-decoration: underline;
+  margin-left: 6px;
+  transition: var(--transition);
+}
+
+.announcement-link:hover {
+  color: #ffffff;
+}
+
+/* =========================================================
+   SAMSUNG NAVBAR
+   ========================================================= */
+.samsung-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: var(--transition);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--samsung-blue), #0284c7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 87, 184, 0.3);
+}
+
+.brand-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--samsung-black);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.brand-ar-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--samsung-blue);
+  border: 1.5px solid var(--samsung-blue);
+  border-radius: var(--radius-full);
+  padding: 1px 6px;
+  letter-spacing: 0.05em;
+}
+
+.brand-subtitle {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--samsung-text-secondary);
+  letter-spacing: 0.08em;
+}
+
+/* Nav Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--samsung-text-secondary);
+  position: relative;
+  padding: 6px 0;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--samsung-black);
+}
+
+.nav-link.active {
+  color: var(--samsung-black);
+  font-weight: 700;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--samsung-black);
+  border-radius: var(--radius-full);
+}
+
+.nav-link-admin {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  background-color: #f1f3f5;
+  color: #1e293b;
+  font-weight: 700;
+  border: 1px solid var(--samsung-border);
+}
+
+.nav-link-admin:hover {
+  background-color: #e2e8f0;
+  color: var(--samsung-black);
+}
+
+.admin-indicator-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10b981;
+}
+
+.btn-text-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--samsung-text-secondary);
+  transition: var(--transition);
+}
+
+.btn-text-nav:hover {
+  background-color: #f1f3f5;
+  color: var(--samsung-black);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-toggle-btn {
+  display: none;
+  background: transparent;
+  padding: 8px;
+  color: var(--samsung-black);
+}
+
+.icon-burger {
+  width: 24px;
+  height: 24px;
+}
+
+.mobile-menu {
+  display: none;
+  padding: 16px 24px 24px;
+  background-color: #ffffff;
+  border-top: 1px solid var(--samsung-border);
+}
+
+.mobile-menu.open {
+  display: block;
+}
+
+.mobile-link {
+  display: block;
+  padding: 10px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--samsung-text-main);
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.mobile-link-admin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--samsung-blue);
+}
+
+.mobile-menu-buttons {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* =========================================================
+   HERO SECTION (SAMSUNG GALAXY UNPACKED AESTHETIC)
+   ========================================================= */
+.hero-section {
+  position: relative;
+  padding: 70px 0 90px;
+  background: radial-gradient(circle at 50% 20%, #ffffff 0%, #f4f6fa 100%);
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-background-glow {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 87, 184, 0.12) 0%, rgba(0, 198, 255, 0.05) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tag-wrapper {
+  margin-bottom: 20px;
+}
+
+.hero-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background-color: #ffffff;
+  border: 1px solid var(--samsung-border);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--samsung-blue);
+  letter-spacing: 0.08em;
+  box-shadow: var(--shadow-sm);
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--samsung-blue);
+  animation: pulseAnimation 2s infinite;
+}
+
+@keyframes pulseAnimation {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 87, 184, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 87, 184, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 87, 184, 0); }
+}
+
+.hero-title {
+  font-size: 3rem;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--samsung-black);
+  margin-bottom: 16px;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-project-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--samsung-blue);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--samsung-text-secondary);
+  max-width: 800px;
+  margin: 0 auto 36px;
+}
+
+.hero-description strong {
+  color: var(--samsung-black);
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 50px;
+}
+
+/* =========================================================
+   INTERACTIVE TURBINE SHOWCASE (HERO 3D/SVG)
+   ========================================================= */
+.hero-showcase-card {
+  background-color: #0b0d13;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  color: #ffffff;
+  position: relative;
+}
+
+.showcase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.showcase-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--samsung-cyan);
+}
+
+.status-live-icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--samsung-cyan);
+  box-shadow: 0 0 8px var(--samsung-cyan);
+}
+
+.showcase-modes {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  gap: 4px;
+}
+
+.btn-mode-toggle {
+  background: transparent;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+}
+
+.btn-mode-toggle:hover {
+  color: #ffffff;
+}
+
+.btn-mode-toggle.active {
+  background-color: #ffffff;
+  color: var(--samsung-black);
+}
+
+.showcase-visual-stage {
+  padding: 24px 12px;
+  background: radial-gradient(circle at 50% 50%, #151a24 0%, #0b0d13 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+
+.turbine-svg {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+
+/* Animations for SVG */
+.flow-animated-line {
+  animation: flowMotion 1.5s linear infinite;
+}
+
+@keyframes flowMotion {
+  from { stroke-dashoffset: 40; }
+  to { stroke-dashoffset: 0; }
+}
+
+.fan-rotation-animation ellipse {
+  transform-origin: 205px 180px;
+  animation: fanPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes fanPulse {
+  0% { transform: scaleY(0.98); }
+  100% { transform: scaleY(1.02); }
+}
+
+.interactive-pin {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.interactive-pin:hover {
+  transform: scale(1.25);
+}
+
+.interactive-pin circle {
+  transition: var(--transition);
+}
+
+.interactive-pin:hover circle {
+  fill: #00c6ff !important;
+}
+
+.hotspot-info-bar {
+  padding: 12px 24px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.showcase-metrics-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 18px 24px;
+  background-color: #08090d;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.metric-item:last-child {
+  border-right: none;
+}
+
+.metric-val {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.metric-lbl {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #8c96a8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+/* =========================================================
+   SECTION HEADERS (SAMSUNG DESIGN)
+   ========================================================= */
+.section-header-center {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 48px;
+}
+
+.section-pill-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--samsung-blue);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  letter-spacing: -0.03em;
+}
+
+.section-subtitle {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--samsung-text-secondary);
+}
+
+/* =========================================================
+   ENGINE SELECTOR & CARDS (SECTION 2)
+   ========================================================= */
+.engine-tabs-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.engine-tabs {
+  display: inline-flex;
+  background-color: #f1f3f5;
+  padding: 5px;
+  border-radius: var(--radius-full);
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.engine-tab {
+  background: transparent;
+  color: var(--samsung-text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.engine-tab:hover {
+  color: var(--samsung-black);
+}
+
+.engine-tab.active {
+  background-color: #ffffff;
+  color: var(--samsung-black);
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+}
+
+.tab-bullet {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: var(--transition);
+}
+
+.engine-tab.active .tab-bullet {
+  background-color: var(--samsung-blue);
+}
+
+/* Engine Detail Card */
+.engine-detail-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--samsung-border);
+  box-shadow: var(--shadow-md);
+  padding: 40px;
+  transition: var(--transition);
+}
+
+.engine-card-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.engine-info-col h3 {
+  font-size: 1.9rem;
+  margin-bottom: 6px;
+  letter-spacing: -0.03em;
+}
+
+.engine-model-sub {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--samsung-blue);
+  margin-bottom: 14px;
+}
+
+.engine-badge-tag {
+  display: inline-block;
+  background-color: #f0f7ff;
+  color: var(--samsung-blue);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0, 87, 184, 0.2);
+  margin-bottom: 16px;
+}
+
+.engine-desc {
+  font-size: 0.98rem;
+  color: var(--samsung-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.engine-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.engine-stat-box {
+  background-color: var(--samsung-surface);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  border: 1px solid var(--samsung-border);
+}
+
+.stat-lbl {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--samsung-text-muted);
+}
+
+.stat-val {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--samsung-black);
+  margin-top: 4px;
+}
+
+.components-list-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  color: var(--samsung-text-main);
+}
+
+.components-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.component-card-mini {
+  background-color: #f8fafc;
+  border: 1px solid var(--samsung-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+}
+
+.component-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--samsung-black);
+}
+
+.component-desc {
+  font-size: 0.82rem;
+  color: var(--samsung-text-secondary);
+  margin-top: 3px;
+  line-height: 1.45;
+}
+
+/* Engine Visual Render Col */
+.engine-visual-col {
+  background: radial-gradient(circle at 50% 50%, #f8fafc 0%, #edf2f7 100%);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  border: 1px solid var(--samsung-border);
+  text-align: center;
+  position: relative;
+}
+
+.visual-badge-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: #ffffff;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1px solid var(--samsung-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.engine-canvas-mock {
+  width: 100%;
+  max-width: 420px;
+  margin: 20px auto 10px;
+}
+
+/* =========================================================
+   PEDAGOGY SECTION (CARDS GRID)
+   ========================================================= */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.samsung-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  border: 1px solid var(--samsung-border);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.samsung-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(0, 87, 184, 0.25);
+}
+
+.feature-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.feature-icon-circle svg {
+  width: 26px;
+  height: 26px;
+}
+
+.bg-blue-light { background-color: #eff6ff; }
+.bg-cyan-light { background-color: #f0f9ff; }
+.bg-orange-light { background-color: #fff7ed; }
+.bg-emerald-light { background-color: #ecfdf5; }
+
+.feature-title {
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.feature-desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--samsung-text-secondary);
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.feature-stat-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--samsung-text-secondary);
+  background-color: var(--samsung-surface);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  align-self: flex-start;
+  border: 1px solid var(--samsung-border);
+}
+
+/* =========================================================
+   SPECS GRID (SECTION 4)
+   ========================================================= */
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.spec-card {
+  background-color: var(--samsung-surface);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  border: 1px solid var(--samsung-border);
+}
+
+.spec-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.spec-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--samsung-blue);
+}
+
+.spec-card-header h3 {
+  font-size: 1.3rem;
+}
+
+.spec-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.spec-list li {
+  font-size: 0.92rem;
+  color: var(--samsung-text-secondary);
+  line-height: 1.5;
+  padding-left: 20px;
+  position: relative;
+}
+
+.spec-list li::before {
+  content: "•";
+  color: var(--samsung-blue);
+  font-size: 1.4rem;
+  position: absolute;
+  left: 0;
+  top: -4px;
+}
+
+.spec-list strong {
+  color: var(--samsung-black);
+}
+
+/* =========================================================
+   SUPPORT HUB & FORM (SECTION 5)
+   ========================================================= */
+.support-tabs-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.support-nav-tab {
+  background-color: #ffffff;
+  color: var(--samsung-text-secondary);
+  border: 1px solid var(--samsung-border);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.support-nav-tab:hover {
+  background-color: #f8fafc;
+  color: var(--samsung-black);
+}
+
+.support-nav-tab.active {
+  background-color: var(--samsung-black);
+  color: #ffffff;
+  border-color: var(--samsung-black);
+}
+
+.support-pane {
+  display: none;
+}
+
+.support-pane.active {
+  display: block;
+}
+
+/* Bug Report Form Card */
+.support-form-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--samsung-border);
+  box-shadow: var(--shadow-md);
+  padding: 44px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-intro {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--samsung-border);
+}
+
+.form-title {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.form-desc {
+  font-size: 0.92rem;
+  color: var(--samsung-text-secondary);
+}
+
+.bug-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--samsung-text-main);
+}
+
+.required {
+  color: var(--status-critical);
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--samsung-border);
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: var(--samsung-text-main);
+  background-color: #ffffff;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--samsung-border-focus);
+  box-shadow: 0 0 0 3px rgba(0, 87, 184, 0.12);
+}
+
+/* Severity Selector */
+.severity-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.severity-option {
+  cursor: pointer;
+}
+
+.severity-option input {
+  display: none;
+}
+
+.severity-pill {
+  display: block;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 1.5px solid var(--samsung-border);
+  background-color: #ffffff;
+  color: var(--samsung-text-secondary);
+  transition: var(--transition);
+}
+
+.severity-option input:checked + .severity-pill.pill-low {
+  background-color: #ecfdf5;
+  border-color: #10b981;
+  color: #065f46;
+}
+
+.severity-option input:checked + .severity-pill.pill-medium {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+  color: #1e40af;
+}
+
+.severity-option input:checked + .severity-pill.pill-high {
+  background-color: #fffbeb;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+.severity-option input:checked + .severity-pill.pill-critical {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+/* File Drop Zone */
+.file-drop-zone {
+  border: 2px dashed var(--samsung-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: center;
+  background-color: #f8fafc;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.file-drop-zone:hover {
+  border-color: var(--samsung-blue);
+  background-color: #f0f7ff;
+}
+
+.file-input-hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.drop-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--samsung-blue);
+  margin-bottom: 8px;
+}
+
+.drop-text {
+  font-size: 0.88rem;
+  color: var(--samsung-text-main);
+  margin-bottom: 4px;
+}
+
+.drop-hint {
+  font-size: 0.75rem;
+  color: var(--samsung-text-muted);
+}
+
+.drop-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.drop-preview-container img {
+  max-height: 180px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-remove-preview {
+  background-color: #fee2e2;
+  color: #991b1b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.form-actions {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-legal-note {
+  font-size: 0.78rem;
+  color: var(--samsung-text-muted);
+  text-align: center;
+}
+
+/* Track Ticket Card */
+.track-ticket-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--samsung-border);
+  box-shadow: var(--shadow-md);
+  padding: 40px;
+}
+
+.track-search-box {
+  text-align: center;
+}
+
+.track-title {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.track-desc {
+  font-size: 0.92rem;
+  color: var(--samsung-text-secondary);
+  margin-bottom: 24px;
+}
+
+.search-input-group {
+  display: flex;
+  gap: 10px;
+  max-width: 550px;
+  margin: 0 auto 20px;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 12px 18px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--samsung-border);
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--samsung-blue);
+  box-shadow: 0 0 0 3px rgba(0, 87, 184, 0.12);
+}
+
+.quick-codes-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--samsung-text-muted);
+}
+
+.pill-code-example {
+  background-color: var(--samsung-surface);
+  border: 1px solid var(--samsung-border);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--samsung-blue);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pill-code-example:hover {
+  background-color: #eff6ff;
+  border-color: var(--samsung-blue);
+}
+
+/* Ticket Tracking Result Card */
+.ticket-result-box {
+  margin-top: 36px;
+  padding-top: 30px;
+  border-top: 1px solid var(--samsung-border);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-card-inner {
+  background-color: var(--samsung-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--samsung-border);
+  padding: 24px;
+}
+
+.result-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.result-code-badge {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--samsung-black);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-pendiente { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.status-en_revision { background-color: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+.status-resuelto { background-color: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+.status-descartado { background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+/* Progress Stepper */
+.progress-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 28px 0;
+  position: relative;
+}
+
+.progress-stepper::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background-color: #e2e8f0;
+  z-index: 0;
+}
+
+.step-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 2px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.step-node.completed .step-circle {
+  background-color: var(--samsung-blue);
+  border-color: var(--samsung-blue);
+  color: #ffffff;
+}
+
+.step-node.active .step-circle {
+  background-color: #ffffff;
+  border-color: var(--samsung-blue);
+  color: var(--samsung-blue);
+  box-shadow: 0 0 0 4px rgba(0, 87, 184, 0.2);
+}
+
+.step-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  text-align: center;
+}
+
+.step-node.active .step-lbl,
+.step-node.completed .step-lbl {
+  color: var(--samsung-black);
+}
+
+.ticket-reply-callout {
+  background-color: #ffffff;
+  border-left: 4px solid var(--samsung-blue);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 20px;
+  margin-top: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.callout-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--samsung-blue);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.callout-text {
+  font-size: 0.9rem;
+  color: var(--samsung-text-main);
+  line-height: 1.5;
+}
+
+/* FAQ Accordion */
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background-color: #ffffff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--samsung-border);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px 24px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--samsung-black);
+  cursor: pointer;
+}
+
+.faq-chevron {
+  width: 20px;
+  height: 20px;
+  color: var(--samsung-text-muted);
+  transition: transform 0.25s ease;
+}
+
+.faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+  color: var(--samsung-blue);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 24px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--samsung-text-secondary);
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 250px;
+  padding: 0 24px 20px;
+}
+
+/* =========================================================
+   ADMIN PORTAL (SECTION 6 - DARK THEME)
+   ========================================================= */
+.bg-zinc-900 {
+  background-color: #0d0f14;
+}
+
+.admin-header-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.admin-shield-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--samsung-cyan);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.admin-title {
+  color: #ffffff;
+  font-size: 2rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.admin-subtitle {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  max-width: 650px;
+}
+
+/* Locked Gate */
+.admin-locked-gate {
+  max-width: 550px;
+  margin: 40px auto;
+}
+
+.locked-card {
+  background-color: #161922;
+  border: 1px solid #282f40;
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.lock-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: rgba(0, 87, 184, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.lock-icon-circle svg {
+  width: 28px;
+  height: 28px;
+}
+
+.locked-card h3 {
+  color: #ffffff;
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+
+.locked-card p {
+  color: #94a3b8;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.pin-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.pin-input {
+  flex-grow: 1;
+  padding: 12px 16px;
+  background-color: #0b0d13;
+  border: 1.5px solid #282f40;
+  border-radius: var(--radius-full);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.92rem;
+}
+
+.pin-input:focus {
+  outline: none;
+  border-color: var(--samsung-blue);
+}
+
+.admin-default-hint {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.admin-default-hint code {
+  color: var(--samsung-cyan);
+  background: rgba(0, 198, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* KPI Cards Grid */
+.kpi-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.kpi-card {
+  background-color: #161922;
+  border: 1px solid #282f40;
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.kpi-card:hover {
+  transform: translateY(-3px);
+  border-color: #3e485e;
+}
+
+.border-amber { border-top: 3px solid #f59e0b; }
+.border-blue { border-top: 3px solid #3b82f6; }
+.border-emerald { border-top: 3px solid #10b981; }
+.border-rose { border-top: 3px solid #ef4444; }
+
+.kpi-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.kpi-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin: 6px 0;
+}
+
+.text-amber { color: #f59e0b; }
+.text-blue-bright { color: #38bdf8; }
+.text-emerald { color: #10b981; }
+.text-rose { color: #f43f5e; }
+
+.kpi-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  align-self: flex-start;
+}
+
+/* Admin Toolbar */
+.admin-toolbar {
+  background-color: #161922;
+  border: 1px solid #282f40;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.toolbar-filters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.admin-select {
+  background-color: #0b0d13;
+  color: #ffffff;
+  border: 1px solid #282f40;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.admin-search-field {
+  background-color: #0b0d13;
+  border: 1px solid #282f40;
+  color: #ffffff;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  width: 260px;
+  outline: none;
+}
+
+.admin-search-field:focus {
+  border-color: var(--samsung-blue);
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Admin Table */
+.admin-table-container {
+  background-color: #161922;
+  border: 1px solid #282f40;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.82rem;
+}
+
+.admin-table th {
+  background-color: #1a1e29;
+  padding: 14px 16px;
+  color: #94a3b8;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #282f40;
+}
+
+.admin-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #202636;
+  color: #cbd5e1;
+}
+
+.admin-table tr:hover td {
+  background-color: #1c212e;
+}
+
+.ticket-code-cell {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--samsung-cyan);
+}
+
+.table-bug-title {
+  color: #ffffff;
+  font-weight: 600;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-device-text {
+  font-size: 0.76rem;
+  color: #94a3b8;
+}
+
+.btn-inspect {
+  background-color: #282f40;
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-inspect:hover {
+  background-color: var(--samsung-blue);
+}
+
+.no-bugs-found {
+  padding: 40px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+/* =========================================================
+   MODALS (POPUP DIALOGS)
+   ========================================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 100%;
+  padding: 36px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-card-lg {
+  max-width: 780px;
+  text-align: left;
+  padding: 30px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-icon-success {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #ecfdf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.modal-icon-success svg {
+  width: 32px;
+  height: 32px;
+}
+
+.modal-title {
+  font-size: 1.45rem;
+  margin-bottom: 8px;
+}
+
+.modal-desc {
+  font-size: 0.9rem;
+  color: var(--samsung-text-secondary);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.ticket-badge-box {
+  background-color: #f1f5f9;
+  border: 1.5px dashed var(--samsung-blue);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ticket-code-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--samsung-text-muted);
+  letter-spacing: 0.08em;
+}
+
+.ticket-code-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: monospace;
+  color: var(--samsung-blue);
+}
+
+.btn-copy-code {
+  background-color: #ffffff;
+  border: 1px solid var(--samsung-border);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--samsung-black);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-copy-code:hover {
+  background-color: #f8fafc;
+  border-color: var(--samsung-black);
+}
+
+.ticket-hint-text {
+  font-size: 0.78rem;
+  color: var(--samsung-text-muted);
+  margin-bottom: 24px;
+}
+
+/* Admin Detail Modal specific */
+.modal-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--samsung-border);
+  margin-bottom: 16px;
+}
+
+.ticket-tag-header {
+  font-size: 0.8rem;
+  font-weight: 800;
+  font-family: monospace;
+  color: var(--samsung-blue);
+  background-color: #eff6ff;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.modal-title-lg {
+  font-size: 1.35rem;
+  margin-top: 6px;
+}
+
+.btn-close-modal {
+  background: transparent;
+  font-size: 1.6rem;
+  color: var(--samsung-text-muted);
+  line-height: 1;
+}
+
+.modal-body-scrollable {
+  overflow-y: auto;
+  padding-right: 6px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  background-color: var(--samsung-surface);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--samsung-border);
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--samsung-text-muted);
+  text-transform: uppercase;
+}
+
+.meta-val {
+  font-size: 0.82rem;
+  color: var(--samsung-text-main);
+}
+
+.modal-section-box {
+  background-color: #ffffff;
+  border: 1px solid var(--samsung-border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+}
+
+.section-box-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--samsung-black);
+}
+
+.section-box-text {
+  font-size: 0.88rem;
+  color: var(--samsung-text-secondary);
+  line-height: 1.5;
+}
+
+.section-box-pre {
+  font-size: 0.82rem;
+  font-family: inherit;
+  color: var(--samsung-text-secondary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.attachment-preview-box {
+  margin-top: 8px;
+  max-height: 220px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--samsung-border);
+}
+
+.attachment-preview-box img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.admin-edit-panel {
+  background-color: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.edit-panel-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--samsung-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modal-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  border-top: 1px solid var(--samsung-border);
+  margin-top: 16px;
+}
+
+.btn-delete-ticket {
+  background: transparent;
+  color: var(--status-critical);
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+}
+
+.btn-delete-ticket:hover {
+  background-color: #fee2e2;
+}
+
+.modal-footer-right {
+  display: flex;
+  gap: 10px;
+}
+
+/* =========================================================
+   SAMSUNG FOOTER
+   ========================================================= */
+.samsung-footer {
+  background-color: #0b0c10;
+  color: #94a3b8;
+  padding: 60px 0 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-desc {
+  font-size: 0.84rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.footer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background-color: #1a1e29;
+  color: #cbd5e1;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.footer-col-title {
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom-bar {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-copyright {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 18px;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================= */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 2.3rem;
+  }
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kpi-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .engine-card-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-actions .btn-text-nav {
+    display: none;
+  }
+  .mobile-toggle-btn {
+    display: block;
+  }
+  .hero-title {
+    font-size: 1.85rem;
+  }
+  .hero-project-title {
+    font-size: 0.75rem;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+  }
+  .hero-cta-group .samsung-btn {
+    width: 100%;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-row-2, .form-row-3 {
+    grid-template-columns: 1fr;
+  }
+  .severity-selector {
+    grid-template-columns: 1fr 1fr;
+  }
+  .showcase-metrics-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .metric-item {
+    border-right: none;
+  }
+  .kpi-cards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-meta-grid {
+    grid-template-columns: 1fr;
+  }
+}

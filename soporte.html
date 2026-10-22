@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARIAE | Centro de Soporte & Reporte de Bugs (Panel Docente)</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%231E3A8A'/><path d='M25 65 L50 25 L75 65 L50 52 Z' fill='white'/><circle cx='50' cy='50' r='12' fill='none' stroke='%2306B6D4' stroke-width='4'/></svg>">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            aero: {
+              950: '#070D18',
+              900: '#0F172A',
+              800: '#1E293B',
+              blue: '#1E3A8A',
+              darkblue: '#172554',
+              cyan: '#06B6D4',
+              sky: '#38BDF8',
+              surface: '#F8FAFC',
+              border: '#E2E8F0',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-aero-surface text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-aero-cyan selection:text-aero-950">
+
+  <!-- ============================================================== -->
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR (PORTAL DE SOPORTE)               -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo & Titular -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-aero-900 to-aero-blue flex items-center justify-center text-white shadow-md shadow-aero-blue/20">
+            <svg class="w-5 h-5 -rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-heading font-extrabold text-xl text-aero-900 tracking-tight">ARIAE</span>
+              <span class="text-[10px] font-bold text-aero-cyan bg-cyan-50 border border-cyan-200 px-2 py-0.5 rounded-full uppercase">
+                Soporte & Admin
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 font-medium">
+              Gestión de Incidencias &bull; Motores Aeronáuticos AR
+            </p>
+          </div>
+        </div>
+
+        <!-- Botón de retorno a la Landing Page -->
+        <div class="flex items-center gap-3">
+          <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-slate-500 bg-slate-100 py-1.5 px-3 rounded-full">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Nueva Ventana Activa
+          </span>
+          <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 rounded-full shadow-sm transition-all hover:text-aero-blue">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            <span>Volver a la Landing Page</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- CONTENIDO PRINCIPAL: SOPORTE Y PANEL DE ADMINISTRACIÓN         -->
+  <!-- ============================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow">
+    
+    <!-- Encabezado de la página -->
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-aero-cyan bg-cyan-50 border border-cyan-200 px-3 py-1 rounded-full mb-3">
+        Mesa de Ayuda & Diagnóstico Técnico
+      </span>
+      <h1 class="font-heading font-extrabold text-3xl sm:text-4xl text-aero-950 tracking-tight">
+        Centro de Soporte & Reporte de Bugs
+      </h1>
+      <p class="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+        Deja un reporte sobre cualquier falla técnica o bug detectado en la aplicación ARIAE. Como administrador, podrás iniciar sesión y revisar todas las incidencias recibidas.
+      </p>
+    </div>
+
+    <!-- Pestañas Principales (Tabs) -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+      
+      <!-- Tab 1: Formulario de Reporte -->
+      <button id="tabBtnReport" type="button" class="tab-btn active px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 shadow-sm bg-aero-900 text-white">
+        <svg class="w-4 h-4 text-aero-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+        </svg>
+        <span>Reportar un Bug</span>
+      </button>
+
+      <!-- Tab 2: Rastrear Ticket -->
+      <button id="tabBtnTrack" type="button" class="tab-btn px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 border border-slate-300 bg-white text-slate-700 hover:bg-slate-50">
+        <svg class="w-4 h-4 text-aero-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <span>Consultar Estado de Ticket</span>
+      </button>
+
+      <!-- Tab 3: Panel de Administrador -->
+      <button id="tabBtnAdmin" type="button" class="tab-btn px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 border border-blue-300 bg-blue-50 text-aero-blue hover:bg-blue-100">
+        <svg class="w-4 h-4 text-aero-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span>Panel de Administrador (Tú)</span>
+        <span id="adminDotStatus" class="w-2 h-2 rounded-full bg-emerald-500 hidden"></span>
+      </button>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- PANE 1: FORMULARIO DE REPORTE DE BUGS                          -->
+    <!-- ============================================================== -->
+    <div id="paneReport" class="pane-content block">
+      <div class="max-w-3xl mx-auto bg-white rounded-3xl border border-slate-200 shadow-md p-6 sm:p-10">
+        
+        <div class="border-b border-slate-200 pb-5 mb-8">
+          <h2 class="font-heading font-bold text-xl text-aero-950 mb-1">
+            Formulario de Reporte de Incidencias ARIAE
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Completa la información sobre la falla técnica experimentada durante la simulación de motores.
+          </p>
+        </div>
+
+        <form id="formBug" class="space-y-6">
+          
+          <!-- Título del Bug -->
+          <div>
+            <label for="inputTitle" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              Título del problema o error <span class="text-rose-500">*</span>
+            </label>
+            <input type="text" id="inputTitle" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan focus:border-transparent text-sm text-slate-900" placeholder="Ej: Pérdida del anclaje del turbofán al acercar la cámara al fan frontal">
+          </div>
+
+          <!-- Categoría y Componente -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="selectCategory" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Categoría de la falla <span class="text-rose-500">*</span>
+              </label>
+              <select id="selectCategory" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan focus:border-transparent text-sm text-slate-900 bg-white">
+                <option value="tracking_vuforia">Tracking Vuforia (Pérdida de plano / Image Target)</option>
+                <option value="renderizado_3d">Fallo Gráfico / Texturas 3D / Shaders</option>
+                <option value="cierre_inesperado">Cierre Inesperado (Crash) / Congelamiento</option>
+                <option value="rendimiento_fps">Rendimiento / Caída de FPS / Lag</option>
+                <option value="audio_ia">Audio Educativo / Síntesis de Voz IA</option>
+                <option value="informacion">Error en Etiquetas o Datos de Componentes</option>
+                <option value="otro">Otro Inconveniente</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="selectEnginePart" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Conjunto o Etapa del Motor <span class="text-rose-500">*</span>
+              </label>
+              <select id="selectEnginePart" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan focus:border-transparent text-sm text-slate-900 bg-white">
+                <option value="Fan Frontal de Titanio">Fan Frontal (Conjunto N1)</option>
+                <option value="Compresor Axial de Alta Presión">Compresor de Alta Presión (Conjunto N2)</option>
+                <option value="Cámara de Combustión">Cámara de Combustión Anular</option>
+                <option value="Turbina de Alta y Baja Presión">Turbinas de Potencia (HPT / LPT)</option>
+                <option value="Tobera de Escape">Tobera de Escape y Mezclador</option>
+                <option value="Marcador Físico / Image Target">Marcador Físico Impreso (Image Target)</option>
+                <option value="General / Interfaz">General / Toda la App</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Nivel de Severidad -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              Nivel de Severidad <span class="text-rose-500">*</span>
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <label class="cursor-pointer">
+                <input type="radio" name="severity" value="baja" class="hidden peer">
+                <div class="py-2.5 px-3 text-center rounded-xl border border-slate-200 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-800 text-xs font-bold text-slate-600 transition-all">
+                  Baja (Detalle estético)
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="severity" value="media" checked class="hidden peer">
+                <div class="py-2.5 px-3 text-center rounded-xl border border-slate-200 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-800 text-xs font-bold text-slate-600 transition-all">
+                  Media (Incomodidad)
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="severity" value="alta" class="hidden peer">
+                <div class="py-2.5 px-3 text-center rounded-xl border border-slate-200 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 text-xs font-bold text-slate-600 transition-all">
+                  Alta (Falla de modo)
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="severity" value="critica" class="hidden peer">
+                <div class="py-2.5 px-3 text-center rounded-xl border border-slate-200 peer-checked:border-rose-500 peer-checked:bg-rose-50 peer-checked:text-rose-800 text-xs font-bold text-slate-600 transition-all">
+                  Crítica (Crash total)
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dispositivo y Versión de Android -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="inputDevice" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Modelo del Dispositivo <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="inputDevice" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan text-sm text-slate-900" placeholder="Ej: Samsung Galaxy S23, Xiaomi 13, Moto G84">
+            </div>
+
+            <div>
+              <label for="inputOS" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Versión de Android
+              </label>
+              <input type="text" id="inputOS" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan text-sm text-slate-900" placeholder="Ej: Android 13 / One UI 5.1" value="Android 13">
+            </div>
+          </div>
+
+          <!-- Descripción del problema -->
+          <div>
+            <label for="inputDescription" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              Descripción detallada de la anomalía <span class="text-rose-500">*</span>
+            </label>
+            <textarea id="inputDescription" rows="4" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan text-sm text-slate-900" placeholder="Explica claramente qué ocurrió, en qué momento de la práctica y cómo se comportó el modelo 3D..."></textarea>
+          </div>
+
+          <!-- Pasos para reproducir -->
+          <div>
+            <label for="inputSteps" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              Pasos para reproducir el fallo
+            </label>
+            <textarea id="inputSteps" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan text-sm text-slate-900 font-mono text-xs" placeholder="1. Abrir ARIAE y enfocar el marcador&#10;2. Cambiar a Modo Funcionamiento&#10;3. Acelerar el flujo al 100%..."></textarea>
+          </div>
+
+          <!-- Adjuntar Captura de Pantalla -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              Adjuntar Captura de Pantalla / Evidencia (Opcional)
+            </label>
+            <div id="dropZone" class="border-2 border-dashed border-slate-300 hover:border-aero-cyan rounded-2xl p-6 text-center bg-slate-50 cursor-pointer transition-all">
+              <input type="file" id="fileScreenshot" accept="image/*" class="hidden">
+              <div id="dropZoneContent">
+                <svg class="w-8 h-8 text-slate-400 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <p class="text-xs text-slate-600 font-medium">
+                  Haz clic aquí o arrastra una imagen (PNG, JPG)
+                </p>
+                <span class="text-[10px] text-slate-400">Captura de pantalla del visor de la app</span>
+              </div>
+              <div id="previewContainer" class="hidden flex-col items-center gap-3">
+                <img id="imgPreview" src="" alt="Vista previa" class="max-h-48 rounded-lg shadow-sm border border-slate-200">
+                <button type="button" id="btnRemoveImg" class="text-xs font-bold text-rose-600 hover:underline">
+                  &times; Eliminar captura
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Datos de Contacto -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-slate-200">
+            <div>
+              <label for="inputName" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Tu Nombre o Alumno
+              </label>
+              <input type="text" id="inputName" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan text-sm text-slate-900" placeholder="Ej: Lucas Gómez">
+            </div>
+
+            <div>
+              <label for="inputEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Correo Electrónico
+              </label>
+              <input type="email" id="inputEmail" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan text-sm text-slate-900" placeholder="lucas@fpuna.edu.py">
+            </div>
+          </div>
+
+          <!-- Botón de Envío -->
+          <div class="pt-4">
+            <button type="submit" class="w-full py-4 px-8 rounded-full text-sm font-extrabold uppercase tracking-wider text-white bg-gradient-to-r from-aero-900 via-aero-blue to-cyan-600 hover:from-aero-blue hover:to-cyan-500 shadow-lg shadow-aero-blue/25 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+              <svg class="w-5 h-5 text-aero-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+              <span>Enviar Reporte a Soporte ARIAE</span>
+            </button>
+            <p class="text-[11px] text-center text-slate-400 mt-3">
+              Al enviar recibirás un número de ticket único para consultar el diagnóstico y respuesta del docente en cualquier momento.
+            </p>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- PANE 2: RASTREADOR DE TICKETS EN TIEMPO REAL                   -->
+    <!-- ============================================================== -->
+    <div id="paneTrack" class="pane-content hidden">
+      <div class="max-w-2xl mx-auto bg-white rounded-3xl border border-slate-200 shadow-md p-6 sm:p-10">
+        
+        <div class="text-center mb-8">
+          <h2 class="font-heading font-bold text-xl text-aero-950 mb-2">
+            Consultar Estado de tu Ticket
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Ingresa tu código de reporte para comprobar si ha sido revisado o si cuenta con respuesta oficial del equipo docente.
+          </p>
+        </div>
+
+        <!-- Buscador -->
+        <div class="flex gap-2 max-w-md mx-auto mb-6">
+          <input type="text" id="inputTrackCode" class="flex-grow px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-aero-cyan text-sm font-mono font-bold uppercase" placeholder="Ej: ARIAE-ENG-8401">
+          <button id="btnSearchTrack" type="button" class="px-6 py-3 bg-aero-900 hover:bg-aero-blue text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors">
+            Buscar
+          </button>
+        </div>
+
+        <!-- Códigos de prueba -->
+        <div class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 mb-8">
+          <span>Tickets de prueba:</span>
+          <button type="button" class="btn-demo-code px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-aero-blue font-mono font-bold rounded-md" data-code="ARIAE-ENG-8401">ARIAE-ENG-8401</button>
+          <button type="button" class="btn-demo-code px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-aero-blue font-mono font-bold rounded-md" data-code="ARIAE-ENG-8402">ARIAE-ENG-8402</button>
+          <button type="button" class="btn-demo-code px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-aero-blue font-mono font-bold rounded-md" data-code="ARIAE-ENG-8403">ARIAE-ENG-8403</button>
+        </div>
+
+        <!-- Resultado del Ticket -->
+        <div id="trackResultBox" class="hidden border-t border-slate-200 pt-6">
+          <!-- Renderizado por JS -->
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- PANE 3: PANEL DE ADMINISTRADOR (BANDEJA DE ENTRADA DOCENTE)    -->
+    <!-- ============================================================== -->
+    <div id="paneAdmin" class="pane-content hidden">
+      
+      <!-- Barrera de Autenticación con PIN -->
+      <div id="adminPinGate" class="max-w-md mx-auto bg-white rounded-3xl border border-slate-200 shadow-lg p-8 text-center my-6">
+        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-aero-blue flex items-center justify-center mx-auto mb-4">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <h3 class="font-heading font-bold text-xl text-aero-950 mb-2">
+          Acceso de Administrador
+        </h3>
+        <p class="text-xs text-slate-500 mb-6">
+          Introduce la clave de acceso docente para gestionar todos los reportes de bugs enviados por los estudiantes.
+        </p>
+
+        <div class="flex gap-2 mb-3">
+          <input type="password" id="adminPin" class="flex-grow px-4 py-3 rounded-xl border border-slate-300 text-center font-bold text-sm tracking-widest focus:outline-none focus:ring-2 focus:ring-aero-cyan" placeholder="Clave: ariae2026 o 1234">
+          <button id="btnUnlockAdmin" type="button" class="px-6 py-3 bg-aero-900 hover:bg-aero-blue text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors">
+            Entrar
+          </button>
+        </div>
+        <span class="text-[11px] text-slate-400">Clave docente por defecto: <code class="font-bold text-aero-blue">ariae2026</code> o <code class="font-bold text-aero-blue">1234</code></span>
+      </div>
+
+      <!-- Espacio de Trabajo del Administrador (Desbloqueado) -->
+      <div id="adminWorkspace" class="hidden space-y-6">
+        
+        <!-- Barra de Estado Admin -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+            <div>
+              <h3 class="font-heading font-bold text-base text-aero-950">Panel Docente Activo</h3>
+              <p class="text-xs text-slate-500">Sesión iniciada como Administrador de ARIAE</p>
+            </div>
+          </div>
+          <button id="btnLockAdmin" type="button" class="text-xs font-bold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 px-4 py-2 rounded-full transition-colors">
+            Cerrar Sesión Admin
+          </button>
+        </div>
+
+        <!-- Métricas KPI en Vivo -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+          
+          <div class="kpi-card bg-white p-4 rounded-2xl border border-slate-200 shadow-sm cursor-pointer hover:border-slate-400 transition-all" data-filter="todos">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Total</span>
+            <div id="kpiTotal" class="font-heading font-extrabold text-2xl text-aero-950 mt-1">0</div>
+            <span class="text-[10px] font-medium text-slate-400">Reportes</span>
+          </div>
+
+          <div class="kpi-card bg-white p-4 rounded-2xl border border-slate-200 border-t-4 border-t-amber-500 shadow-sm cursor-pointer hover:border-amber-400 transition-all" data-filter="pendiente">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Pendientes</span>
+            <div id="kpiPending" class="font-heading font-extrabold text-2xl text-amber-600 mt-1">0</div>
+            <span class="text-[10px] font-medium text-slate-400">Por revisar</span>
+          </div>
+
+          <div class="kpi-card bg-white p-4 rounded-2xl border border-slate-200 border-t-4 border-t-blue-500 shadow-sm cursor-pointer hover:border-blue-400 transition-all" data-filter="en_revision">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-blue-600">En Revisión</span>
+            <div id="kpiInReview" class="font-heading font-extrabold text-2xl text-blue-600 mt-1">0</div>
+            <span class="text-[10px] font-medium text-slate-400">En diagnóstico</span>
+          </div>
+
+          <div class="kpi-card bg-white p-4 rounded-2xl border border-slate-200 border-t-4 border-t-emerald-500 shadow-sm cursor-pointer hover:border-emerald-400 transition-all" data-filter="resuelto">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600">Solucionados</span>
+            <div id="kpiResolved" class="font-heading font-extrabold text-2xl text-emerald-600 mt-1">0</div>
+            <span class="text-[10px] font-medium text-slate-400">Corregidos</span>
+          </div>
+
+          <div class="kpi-card bg-white p-4 rounded-2xl border border-slate-200 border-t-4 border-t-rose-500 shadow-sm cursor-pointer hover:border-rose-400 transition-all" data-filter="critica">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-rose-600">Críticos</span>
+            <div id="kpiCritical" class="font-heading font-extrabold text-2xl text-rose-600 mt-1">0</div>
+            <span class="text-[10px] font-medium text-slate-400">Crashes graves</span>
+          </div>
+
+        </div>
+
+        <!-- Barra de Herramientas (Filtros, Búsqueda, Exportación) -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+            <select id="filterStatus" class="px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-700 bg-white">
+              <option value="todos">Todos los Estados</option>
+              <option value="pendiente">Solo Pendientes</option>
+              <option value="en_revision">En Revisión</option>
+              <option value="resuelto">Solucionados</option>
+              <option value="descartado">Descartados</option>
+            </select>
+
+            <select id="filterSeverity" class="px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-700 bg-white">
+              <option value="todos">Todas las Severidades</option>
+              <option value="critica">Crítica (Crash)</option>
+              <option value="alta">Alta</option>
+              <option value="media">Media</option>
+              <option value="baja">Baja</option>
+            </select>
+
+            <input type="text" id="filterSearch" placeholder="Buscar por código, motor o dispositivo..." class="px-3 py-2 rounded-xl border border-slate-300 text-xs text-slate-800 w-full sm:w-60 focus:outline-none focus:ring-1 focus:ring-aero-cyan">
+          </div>
+
+          <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+            <button id="btnExportCsv" type="button" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Exportar CSV</span>
+            </button>
+
+            <button id="btnResetDemo" type="button" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors" title="Restaurar datos de prueba">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                <path d="M21 3v5h-5"/>
+                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                <path d="M8 16H3v5"/>
+              </svg>
+              <span>Datos Demo</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Tabla de Reportes -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider font-extrabold text-[10px]">
+                <th class="py-3 px-4">Ticket</th>
+                <th class="py-3 px-4">Estado</th>
+                <th class="py-3 px-4">Severidad</th>
+                <th class="py-3 px-4">Título del Problema</th>
+                <th class="py-3 px-4">Etapa Motor</th>
+                <th class="py-3 px-4">Dispositivo</th>
+                <th class="py-3 px-4">Reportado Por</th>
+                <th class="py-3 px-4">Fecha</th>
+                <th class="py-3 px-4 text-right">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tableBodyBugs" class="divide-y divide-slate-100">
+              <!-- Renderizado por JS -->
+            </tbody>
+          </table>
+          <div id="noBugsFound" class="hidden p-8 text-center text-slate-400 text-xs">
+            No se encontraron reportes con los filtros seleccionados.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: CONFIRMACIÓN DE TICKET GENERADO                         -->
+  <!-- ============================================================== -->
+  <div id="modalTicketSuccess" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center shadow-2xl border border-slate-100 animate-scale-up">
+      <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h3 class="font-heading font-bold text-xl text-slate-900 mb-2">¡Reporte Enviado con Éxito!</h3>
+      <p class="text-xs text-slate-500 mb-6">
+        Tu incidencia ha sido radicada correctamente en el sistema. Utiliza el siguiente código para verificar la respuesta del equipo docente:
+      </p>
+
+      <div class="bg-slate-50 border-2 border-dashed border-aero-blue rounded-2xl p-4 mb-6">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">CÓDIGO DE SEGUIMIENTO</span>
+        <div id="txtTicketCodeGenerated" class="font-mono font-extrabold text-2xl text-aero-blue">ARIAE-ENG-XXXX</div>
+        <button id="btnCopyCode" type="button" class="mt-2 text-xs font-bold text-slate-700 hover:text-aero-blue bg-white border border-slate-200 px-3 py-1 rounded-full shadow-sm">
+          Copiar Código
+        </button>
+      </div>
+
+      <button id="btnCloseModalSuccess" type="button" class="w-full py-3 bg-aero-900 hover:bg-aero-blue text-white rounded-full text-xs font-bold uppercase tracking-wider transition-colors">
+        Aceptar
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: GESTIÓN DE TICKET (ADMINISTRADOR)                       -->
+  <!-- ============================================================== -->
+  <div id="modalAdminInspect" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 max-h-[90vh] flex flex-col justify-between">
+      
+      <!-- Encabezado Modal -->
+      <div class="flex items-start justify-between pb-4 border-b border-slate-200 mb-4">
+        <div>
+          <span id="inspectCodeBadge" class="text-xs font-mono font-bold text-aero-blue bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">
+            ARIAE-ENG-0000
+          </span>
+          <h3 id="inspectTitle" class="font-heading font-bold text-lg text-slate-900 mt-1">Título del problema</h3>
+        </div>
+        <button id="btnCloseInspect" type="button" class="text-slate-400 hover:text-slate-700 text-2xl font-bold leading-none">&times;</button>
+      </div>
+
+      <!-- Cuerpo Scrolleable -->
+      <div class="overflow-y-auto space-y-4 pr-2 text-xs text-slate-600">
+        
+        <!-- Metadatos -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+          <div>
+            <span class="font-bold text-slate-400 uppercase text-[9px] block">Etapa Motor</span>
+            <span id="inspectEngine" class="font-bold text-slate-800">--</span>
+          </div>
+          <div>
+            <span class="font-bold text-slate-400 uppercase text-[9px] block">Categoría</span>
+            <span id="inspectCategory" class="text-slate-800">--</span>
+          </div>
+          <div>
+            <span class="font-bold text-slate-400 uppercase text-[9px] block">Dispositivo</span>
+            <span id="inspectDevice" class="text-slate-800">--</span>
+          </div>
+          <div>
+            <span class="font-bold text-slate-400 uppercase text-[9px] block">Reportado Por</span>
+            <span id="inspectReporter" class="text-slate-800">--</span>
+          </div>
+        </div>
+
+        <!-- Descripción & Pasos -->
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+          <span class="font-bold text-slate-800 block mb-1">Descripción:</span>
+          <p id="inspectDescription" class="leading-relaxed text-slate-700"></p>
+        </div>
+
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200">
+          <span class="font-bold text-slate-800 block mb-1">Pasos de Reproducción:</span>
+          <pre id="inspectSteps" class="font-mono text-[11px] whitespace-pre-wrap text-slate-600"></pre>
+        </div>
+
+        <!-- Captura de pantalla si existe -->
+        <div id="inspectAttachmentBox" class="hidden bg-white p-3.5 rounded-xl border border-slate-200">
+          <span class="font-bold text-slate-800 block mb-2">Captura de Pantalla Adjunta:</span>
+          <img id="inspectImg" src="" alt="Captura" class="max-h-60 rounded-lg shadow-sm border border-slate-200">
+        </div>
+
+        <!-- Edición de Estado y Respuesta del Administrador -->
+        <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-200 space-y-3">
+          <span class="font-heading font-bold text-aero-blue uppercase tracking-wider text-[11px] block">
+            Acción del Administrador Docente
+          </span>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Cambiar Estado:</label>
+              <select id="inspectStatusSelect" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white font-bold text-xs">
+                <option value="pendiente">Pendiente</option>
+                <option value="en_revision">En Revisión</option>
+                <option value="resuelto">Resuelto (Solución implementada)</option>
+                <option value="descartado">Descartado</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Severidad:</label>
+              <select id="inspectSeveritySelect" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white font-bold text-xs">
+                <option value="baja">Baja</option>
+                <option value="media">Media</option>
+                <option value="alta">Alta</option>
+                <option value="critica">Crítica (Crash)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Respuesta Oficial para el Usuario:</label>
+            <textarea id="inspectReplyInput" rows="3" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs text-slate-800" placeholder="Escribe aquí la solución o explicación para que el alumno la lea al rastrear su ticket..."></textarea>
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Notas Internas Docentes:</label>
+            <textarea id="inspectNotesInput" rows="2" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs text-slate-800" placeholder="Notas técnicas privadas, commits o tareas pendientes..."></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pie del Modal -->
+      <div class="flex items-center justify-between pt-4 border-t border-slate-200 mt-4">
+        <button id="btnDeleteBug" type="button" class="text-xs font-bold text-rose-600 hover:text-rose-700 hover:bg-rose-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          <span>Eliminar Ticket</span>
+        </button>
+
+        <div class="flex gap-2">
+          <button id="btnCancelInspect" type="button" class="px-4 py-2 border border-slate-300 text-slate-700 hover:bg-slate-50 rounded-full text-xs font-bold">
+            Cancelar
+          </button>
+          <button id="btnSaveInspect" type="button" class="px-6 py-2 bg-aero-blue hover:bg-aero-900 text-white rounded-full text-xs font-bold shadow-sm">
+            Guardar Cambios
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- PIE DE PÁGINA                                                  -->
+  <!-- ============================================================== -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>&copy; 2026 ARIAE &bull; Facultad Politécnica, Universidad Nacional de Asunción (FP-UNA)</p>
+      <a href="index.html" class="text-aero-blue hover:underline font-bold">Volver a la Página Principal ARIAE &rarr;</a>
+    </div>
+  </footer>
+
+  <!-- Lógica en JS Puro para Gestión de Soporte y Admin -->
+  <script>
+    (function() {
+      'use strict';
+
+      const STORAGE_KEY = 'ariae_bugs_db';
+      const AUTH_KEY = 'ariae_admin_auth';
+
+      // Datos iniciales de demostración
+      const INITIAL_BUGS = [
+        {
+          id: "bug-101",
+          ticketCode: "ARIAE-ENG-8401",
+          title: "Pérdida de anclaje del Turbofán sobre superficies con reflejo en laboratorio",
+          category: "tracking_vuforia",
+          categoryLabel: "Tracking Vuforia (Image Target)",
+          enginePart: "Marcador Físico / Image Target",
+          severity: "alta",
+          status: "en_revision",
+          reportedBy: { name: "Prof. Carlos Mendoza", email: "cmendoza@fpuna.edu.py" },
+          deviceInfo: { device: "Samsung Galaxy S23 Ultra", os: "Android 14 (One UI 6.1)" },
+          description: "Al proyectar el modelo del Turbofán en el laboratorio de motores sobre mesas metálicas con reflejo de luz fluorescente, el modelo se desalinea unos 15cm al activar el corte transversal del compresor.",
+          stepsToReproduce: "1. Abrir ARIAE en Galaxy S23 Ultra.\n2. Enfocar el Image Target sobre mesa con reflejo.\n3. Activar 'Modo Despiece'.\n4. El modelo pierde el punto de referencia.",
+          attachmentUrl: null,
+          adminNotes: "Se recomienda imprimir el marcador en papel mate no reflectante mientras ajustamos el contraste de Vuforia.",
+          adminReply: "Estimado Prof. Mendoza: Se ha calibrado el contraste del Image Target en Unity 6. La actualización v1.2.1 resolverá la sensibilidad a reflejos.",
+          createdAt: "2026-10-18T10:15:00.000Z"
+        },
+        {
+          id: "bug-102",
+          ticketCode: "ARIAE-ENG-8402",
+          title: "Caída de FPS al activar partículas de combustión y flujo N1/N2",
+          category: "rendimiento_fps",
+          categoryLabel: "Rendimiento / Caída de FPS",
+          enginePart: "Cámara de Combustión",
+          severity: "media",
+          status: "pendiente",
+          reportedBy: { name: "Ing. Sofía Valenzuela", email: "svalenzuela@fpuna.edu.py" },
+          deviceInfo: { device: "Samsung Galaxy A54 5G", os: "Android 13" },
+          description: "En Modo Funcionamiento al elevar el flujo de gases a máxima potencia, los cuadros por segundo caen de 30 a 14 FPS en dispositivos gama media.",
+          stepsToReproduce: "1. Seleccionar 'Modo Funcionamiento'.\n2. Subir flujo de gases al 100%.\n3. Observar tirones en la animación de partículas.",
+          adminNotes: "Optimizar el sistema de partículas shuriken en Unity 6 para GPU Mali.",
+          adminReply: "",
+          createdAt: "2026-10-19T16:40:00.000Z"
+        },
+        {
+          id: "bug-103",
+          ticketCode: "ARIAE-ENG-8403",
+          title: "Cierre inesperado (Crash) al tocar rápidamente el botón de síntesis de voz",
+          category: "cierre_inesperado",
+          categoryLabel: "Cierre Inesperado / Crash",
+          enginePart: "General / Interfaz",
+          severity: "critica",
+          status: "resuelto",
+          reportedBy: { name: "Andrés Morales", email: "andres.m@estudiante.edu.py" },
+          deviceInfo: { device: "Xiaomi Redmi Note 12", os: "Android 13" },
+          description: "Si se presiona repetidas veces el botón de locución con IA mientras carga el audio del conjunto N1, la app se congela y se cierra de golpe.",
+          stepsToReproduce: "1. Ir a Modo Información.\n2. Presionar rápidamente 4 veces el icono de locución.\n3. Se produce un crash de memoria en el buffer de audio.",
+          adminNotes: "Corregido con un cooldown de 500ms en el trigger de síntesis de voz.",
+          adminReply: "Hola Andrés, el problema ha sido corregido en el parche v1.2.0. Por favor reinstala el APK.",
+          createdAt: "2026-10-15T09:20:00.000Z"
+        }
+      ];
+
+      // Estado
+      let bugs = [];
+      let isAdminLoggedIn = false;
+      let attachedImgBase64 = null;
+      let activeBugId = null;
+
+      // Elementos DOM
+      const tabBtnReport = document.getElementById('tabBtnReport');
+      const tabBtnTrack = document.getElementById('tabBtnTrack');
+      const tabBtnAdmin = document.getElementById('tabBtnAdmin');
+      const paneReport = document.getElementById('paneReport');
+      const paneTrack = document.getElementById('paneTrack');
+      const paneAdmin = document.getElementById('paneAdmin');
+
+      const formBug = document.getElementById('formBug');
+      const dropZone = document.getElementById('dropZone');
+      const fileScreenshot = document.getElementById('fileScreenshot');
+      const dropZoneContent = document.getElementById('dropZoneContent');
+      const previewContainer = document.getElementById('previewContainer');
+      const imgPreview = document.getElementById('imgPreview');
+      const btnRemoveImg = document.getElementById('btnRemoveImg');
+
+      const modalTicketSuccess = document.getElementById('modalTicketSuccess');
+      const txtTicketCodeGenerated = document.getElementById('txtTicketCodeGenerated');
+      const btnCopyCode = document.getElementById('btnCopyCode');
+      const btnCloseModalSuccess = document.getElementById('btnCloseModalSuccess');
+
+      // Tracker
+      const inputTrackCode = document.getElementById('inputTrackCode');
+      const btnSearchTrack = document.getElementById('btnSearchTrack');
+      const trackResultBox = document.getElementById('trackResultBox');
+
+      // Admin
+      const adminPinGate = document.getElementById('adminPinGate');
+      const adminWorkspace = document.getElementById('adminWorkspace');
+      const adminPin = document.getElementById('adminPin');
+      const btnUnlockAdmin = document.getElementById('btnUnlockAdmin');
+      const btnLockAdmin = document.getElementById('btnLockAdmin');
+      const adminDotStatus = document.getElementById('adminDotStatus');
+
+      const kpiTotal = document.getElementById('kpiTotal');
+      const kpiPending = document.getElementById('kpiPending');
+      const kpiInReview = document.getElementById('kpiInReview');
+      const kpiResolved = document.getElementById('kpiResolved');
+      const kpiCritical = document.getElementById('kpiCritical');
+
+      const filterStatus = document.getElementById('filterStatus');
+      const filterSeverity = document.getElementById('filterSeverity');
+      const filterSearch = document.getElementById('filterSearch');
+      const tableBodyBugs = document.getElementById('tableBodyBugs');
+      const noBugsFound = document.getElementById('noBugsFound');
+
+      const btnExportCsv = document.getElementById('btnExportCsv');
+      const btnResetDemo = document.getElementById('btnResetDemo');
+
+      // Modal Admin Inspect
+      const modalAdminInspect = document.getElementById('modalAdminInspect');
+      const btnCloseInspect = document.getElementById('btnCloseInspect');
+      const btnCancelInspect = document.getElementById('btnCancelInspect');
+      const btnSaveInspect = document.getElementById('btnSaveInspect');
+      const btnDeleteBug = document.getElementById('btnDeleteBug');
+
+      const inspectCodeBadge = document.getElementById('inspectCodeBadge');
+      const inspectTitle = document.getElementById('inspectTitle');
+      const inspectEngine = document.getElementById('inspectEngine');
+      const inspectCategory = document.getElementById('inspectCategory');
+      const inspectDevice = document.getElementById('inspectDevice');
+      const inspectReporter = document.getElementById('inspectReporter');
+      const inspectDescription = document.getElementById('inspectDescription');
+      const inspectSteps = document.getElementById('inspectSteps');
+      const inspectAttachmentBox = document.getElementById('inspectAttachmentBox');
+      const inspectImg = document.getElementById('inspectImg');
+      const inspectStatusSelect = document.getElementById('inspectStatusSelect');
+      const inspectSeveritySelect = document.getElementById('inspectSeveritySelect');
+      const inspectReplyInput = document.getElementById('inspectReplyInput');
+      const inspectNotesInput = document.getElementById('inspectNotesInput');
+
+      // Init
+      function init() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) {
+          bugs = [...INITIAL_BUGS];
+          saveBugs();
+        } else {
+          try {
+            bugs = JSON.parse(saved);
+          } catch(e) {
+            bugs = [...INITIAL_BUGS];
+            saveBugs();
+          }
+        }
+
+        isAdminLoggedIn = sessionStorage.getItem(AUTH_KEY) === 'true';
+
+        setupTabs();
+        setupForm();
+        setupTracker();
+        setupAdmin();
+        updateAdminView();
+      }
+
+      function saveBugs() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(bugs));
+      }
+
+      // Tabs
+      function setupTabs() {
+        const tabs = [
+          { btn: tabBtnReport, pane: paneReport },
+          { btn: tabBtnTrack, pane: paneTrack },
+          { btn: tabBtnAdmin, pane: paneAdmin }
+        ];
+
+        tabs.forEach(t => {
+          t.btn.addEventListener('click', () => {
+            tabs.forEach(item => {
+              item.btn.classList.remove('bg-aero-900', 'text-white');
+              item.btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+              item.pane.classList.add('hidden');
+            });
+            t.btn.classList.add('bg-aero-900', 'text-white');
+            t.btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+            t.pane.classList.remove('hidden');
+
+            if (t.btn === tabBtnAdmin) {
+              updateAdminView();
+            }
+          });
+        });
+      }
+
+      // Bug Form
+      function setupForm() {
+        // Drag & drop
+        dropZone.addEventListener('click', () => fileScreenshot.click());
+        fileScreenshot.addEventListener('change', (e) => {
+          if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+        });
+
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-cyan-500'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('border-cyan-500'));
+        dropZone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          dropZone.classList.remove('border-cyan-500');
+          if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+        });
+
+        btnRemoveImg.addEventListener('click', (e) => {
+          e.stopPropagation();
+          attachedImgBase64 = null;
+          fileScreenshot.value = '';
+          previewContainer.classList.add('hidden');
+          dropZoneContent.classList.remove('hidden');
+        });
+
+        function handleFile(file) {
+          if (!file.type.match('image.*')) {
+            alert('Por favor selecciona un archivo de imagen.');
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            attachedImgBase64 = e.target.result;
+            imgPreview.src = attachedImgBase64;
+            dropZoneContent.classList.add('hidden');
+            previewContainer.classList.remove('hidden');
+          };
+          reader.readAsDataURL(file);
+        }
+
+        // Submit
+        formBug.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = document.getElementById('inputTitle').value.trim();
+          const category = document.getElementById('selectCategory').value;
+          const enginePart = document.getElementById('selectEnginePart').value;
+          const severity = document.querySelector('input[name="severity"]:checked')?.value || 'media';
+          const device = document.getElementById('inputDevice').value.trim();
+          const os = document.getElementById('inputOS').value.trim();
+          const description = document.getElementById('inputDescription').value.trim();
+          const steps = document.getElementById('inputSteps').value.trim();
+          const name = document.getElementById('inputName').value.trim() || 'Estudiante FP-UNA';
+          const email = document.getElementById('inputEmail').value.trim();
+
+          const categoryLabels = {
+            tracking_vuforia: 'Tracking Vuforia (Image Target)',
+            renderizado_3d: 'Fallo Gráfico / Texturas 3D / Shaders',
+            cierre_inesperado: 'Cierre Inesperado (Crash)',
+            rendimiento_fps: 'Rendimiento y Caída de FPS',
+            audio_ia: 'Audio Educativo / Síntesis de Voz IA',
+            informacion: 'Error en Etiquetas / Datos',
+            otro: 'Otro Inconveniente'
+          };
+
+          const ticketCode = `ARIAE-ENG-${Math.floor(1000 + Math.random() * 9000)}`;
+          const newBug = {
+            id: `bug-${Date.now()}`,
+            ticketCode,
+            title,
+            category,
+            categoryLabel: categoryLabels[category] || 'General',
+            enginePart,
+            severity,
+            status: 'pendiente',
+            reportedBy: { name, email },
+            deviceInfo: { device, os },
+            description,
+            stepsToReproduce: steps,
+            attachmentUrl: attachedImgBase64,
+            adminNotes: '',
+            adminReply: '',
+            createdAt: new Date().toISOString()
+          };
+
+          bugs.unshift(newBug);
+          saveBugs();
+
+          txtTicketCodeGenerated.textContent = ticketCode;
+          modalTicketSuccess.classList.remove('hidden');
+
+          formBug.reset();
+          attachedImgBase64 = null;
+          previewContainer.classList.add('hidden');
+          dropZoneContent.classList.remove('hidden');
+        });
+
+        btnCopyCode.addEventListener('click', () => {
+          navigator.clipboard.writeText(txtTicketCodeGenerated.textContent).then(() => {
+            btnCopyCode.textContent = '¡Copiado!';
+            setTimeout(() => btnCopyCode.textContent = 'Copiar Código', 2000);
+          });
+        });
+
+        btnCloseModalSuccess.addEventListener('click', () => {
+          modalTicketSuccess.classList.add('hidden');
+        });
+      }
+
+      // Tracker
+      function setupTracker() {
+        btnSearchTrack.addEventListener('click', runTrackSearch);
+        inputTrackCode.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') runTrackSearch();
+        });
+
+        document.querySelectorAll('.btn-demo-code').forEach(btn => {
+          btn.addEventListener('click', () => {
+            inputTrackCode.value = btn.getAttribute('data-code');
+            runTrackSearch();
+          });
+        });
+
+        function runTrackSearch() {
+          const code = inputTrackCode.value.trim().toUpperCase();
+          if (!code) return;
+
+          const found = bugs.find(b => b.ticketCode.toUpperCase() === code);
+          trackResultBox.classList.remove('hidden');
+
+          if (!found) {
+            trackResultBox.innerHTML = `
+              <div class="text-center p-6 bg-rose-50 rounded-2xl border border-rose-200 text-rose-700">
+                <p class="font-bold">Ticket no encontrado (${code})</p>
+                <p class="text-xs text-rose-600 mt-1">Verifica haber escrito correctamente el código generado.</p>
+              </div>
+            `;
+            return;
+          }
+
+          const statusStyles = {
+            pendiente: { label: 'Pendiente de Revisión', class: 'bg-amber-100 text-amber-800 border-amber-300', step: 1 },
+            en_revision: { label: 'En Investigación Técnica', class: 'bg-blue-100 text-blue-800 border-blue-300', step: 2 },
+            resuelto: { label: 'Solución Implementada', class: 'bg-emerald-100 text-emerald-800 border-emerald-300', step: 3 },
+            descartado: { label: 'Descartado / Duplicado', class: 'bg-slate-100 text-slate-700 border-slate-300', step: 1 }
+          };
+
+          const s = statusStyles[found.status] || statusStyles.pendiente;
+
+          trackResultBox.innerHTML = `
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 text-xs space-y-4">
+              <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="font-mono font-extrabold text-sm text-aero-blue">${found.ticketCode}</span>
+                <span class="px-2.5 py-1 rounded-full font-bold uppercase tracking-wider text-[10px] border ${s.class}">
+                  ${s.label}
+                </span>
+              </div>
+
+              <div>
+                <h4 class="font-heading font-bold text-sm text-slate-900">${found.title}</h4>
+                <p class="text-slate-500 mt-0.5">Etapa: ${found.enginePart} &bull; Dispositivo: ${found.deviceInfo.device}</p>
+              </div>
+
+              <!-- Stepper -->
+              <div class="flex items-center justify-between text-[11px] font-bold text-slate-500 py-2 border-y border-slate-200">
+                <div class="flex items-center gap-1.5 ${s.step >= 1 ? 'text-aero-blue font-extrabold' : ''}">
+                  <span class="w-5 h-5 rounded-full ${s.step >= 1 ? 'bg-aero-blue text-white' : 'bg-slate-200'} flex items-center justify-center text-[10px]">1</span>
+                  Recibido
+                </div>
+                <div class="flex items-center gap-1.5 ${s.step >= 2 ? 'text-aero-blue font-extrabold' : ''}">
+                  <span class="w-5 h-5 rounded-full ${s.step >= 2 ? 'bg-aero-blue text-white' : 'bg-slate-200'} flex items-center justify-center text-[10px]">2</span>
+                  En Diagnóstico
+                </div>
+                <div class="flex items-center gap-1.5 ${s.step >= 3 ? 'text-emerald-600 font-extrabold' : ''}">
+                  <span class="w-5 h-5 rounded-full ${s.step >= 3 ? 'bg-emerald-600 text-white' : 'bg-slate-200'} flex items-center justify-center text-[10px]">3</span>
+                  Solucionado
+                </div>
+              </div>
+
+              <!-- Respuesta Oficial -->
+              ${found.adminReply ? `
+                <div class="bg-white p-3.5 rounded-xl border-l-4 border-aero-cyan shadow-sm">
+                  <span class="font-bold text-aero-blue block uppercase text-[10px] mb-1">Respuesta Oficial del Docente / Tutor:</span>
+                  <p class="text-slate-800 leading-relaxed">${found.adminReply}</p>
+                </div>
+              ` : `
+                <div class="bg-white p-3 rounded-xl border border-slate-200 text-slate-500 italic">
+                  Tu reporte está en cola de evaluación técnica por los ingenieros y docentes tutores.
+                </div>
+              `}
+            </div>
+          `;
+        }
+      }
+
+      // Admin Management
+      function setupAdmin() {
+        btnUnlockAdmin.addEventListener('click', () => {
+          const p = adminPin.value.trim().toLowerCase();
+          if (p === 'ariae2026' || p === '1234' || p === 'admin') {
+            isAdminLoggedIn = true;
+            sessionStorage.setItem(AUTH_KEY, 'true');
+            adminPin.value = '';
+            updateAdminView();
+          } else {
+            alert('Clave incorrecta. Clave docente por defecto: ariae2026 o 1234');
+          }
+        });
+
+        btnLockAdmin.addEventListener('click', () => {
+          isAdminLoggedIn = false;
+          sessionStorage.removeItem(AUTH_KEY);
+          updateAdminView();
+        });
+
+        // KPI card filters
+        document.querySelectorAll('.kpi-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const f = card.getAttribute('data-filter');
+            if (f === 'critica') {
+              filterSeverity.value = 'critica';
+              filterStatus.value = 'todos';
+            } else {
+              filterStatus.value = f;
+              filterSeverity.value = 'todos';
+            }
+            renderTable();
+          });
+        });
+
+        filterStatus.addEventListener('change', renderTable);
+        filterSeverity.addEventListener('change', renderTable);
+        filterSearch.addEventListener('input', renderTable);
+
+        // Export CSV
+        btnExportCsv.addEventListener('click', () => {
+          if (!bugs.length) return alert('No hay reportes.');
+          const headers = ['Ticket', 'Titulo', 'Estado', 'Severidad', 'Etapa', 'Dispositivo', 'ReportadoPor', 'Fecha', 'Respuesta'];
+          const rows = bugs.map(b => [
+            `"${b.ticketCode}"`, `"${b.title.replace(/"/g, '""')}"`, `"${b.status}"`, `"${b.severity}"`,
+            `"${b.enginePart}"`, `"${b.deviceInfo.device}"`, `"${b.reportedBy.name || ''}"`,
+            `"${b.createdAt}"`, `"${(b.adminReply || '').replace(/"/g, '""')}"`
+          ]);
+          const csv = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+          const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `ARIAE_Reportes_${new Date().toISOString().slice(0, 10)}.csv`;
+          a.click();
+        });
+
+        // Reset demo data
+        btnResetDemo.addEventListener('click', () => {
+          if (confirm('¿Restablecer los reportes de demostración iniciales?')) {
+            bugs = [...INITIAL_BUGS];
+            saveBugs();
+            renderKPIs();
+            renderTable();
+            alert('Datos demo recargados.');
+          }
+        });
+
+        // Modal Inspect
+        btnCloseInspect.addEventListener('click', closeInspect);
+        btnCancelInspect.addEventListener('click', closeInspect);
+        btnSaveInspect.addEventListener('click', () => {
+          if (!activeBugId) return;
+          const idx = bugs.findIndex(b => b.id === activeBugId);
+          if (idx !== -1) {
+            bugs[idx].status = inspectStatusSelect.value;
+            bugs[idx].severity = inspectSeveritySelect.value;
+            bugs[idx].adminReply = inspectReplyInput.value.trim();
+            bugs[idx].adminNotes = inspectNotesInput.value.trim();
+            saveBugs();
+            renderKPIs();
+            renderTable();
+            closeInspect();
+            alert('Ticket actualizado correctamente.');
+          }
+        });
+
+        btnDeleteBug.addEventListener('click', () => {
+          if (!activeBugId) return;
+          if (confirm('¿Eliminar este reporte permanentemente?')) {
+            bugs = bugs.filter(b => b.id !== activeBugId);
+            saveBugs();
+            renderKPIs();
+            renderTable();
+            closeInspect();
+          }
+        });
+
+        function closeInspect() {
+          modalAdminInspect.classList.add('hidden');
+          activeBugId = null;
+        }
+      }
+
+      function updateAdminView() {
+        if (isAdminLoggedIn) {
+          adminPinGate.classList.add('hidden');
+          adminWorkspace.classList.remove('hidden');
+          adminDotStatus.classList.remove('hidden');
+          renderKPIs();
+          renderTable();
+        } else {
+          adminPinGate.classList.remove('hidden');
+          adminWorkspace.classList.add('hidden');
+          adminDotStatus.classList.add('hidden');
+        }
+      }
+
+      function renderKPIs() {
+        kpiTotal.textContent = bugs.length;
+        kpiPending.textContent = bugs.filter(b => b.status === 'pendiente').length;
+        kpiInReview.textContent = bugs.filter(b => b.status === 'en_revision').length;
+        kpiResolved.textContent = bugs.filter(b => b.status === 'resuelto').length;
+        kpiCritical.textContent = bugs.filter(b => b.severity === 'critica').length;
+      }
+
+      function renderTable() {
+        const sFilter = filterStatus.value;
+        const sevFilter = filterSeverity.value;
+        const q = filterSearch.value.trim().toLowerCase();
+
+        let list = [...bugs];
+
+        if (sFilter !== 'todos') list = list.filter(b => b.status === sFilter);
+        if (sevFilter !== 'todos') list = list.filter(b => b.severity === sevFilter);
+        if (q) {
+          list = list.filter(b =>
+            b.ticketCode.toLowerCase().includes(q) ||
+            b.title.toLowerCase().includes(q) ||
+            b.enginePart.toLowerCase().includes(q) ||
+            b.deviceInfo.device.toLowerCase().includes(q) ||
+            (b.reportedBy.name && b.reportedBy.name.toLowerCase().includes(q))
+          );
+        }
+
+        if (!list.length) {
+          tableBodyBugs.innerHTML = '';
+          noBugsFound.classList.remove('hidden');
+          return;
+        }
+
+        noBugsFound.classList.add('hidden');
+
+        const statusBadges = {
+          pendiente: '<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">Pendiente</span>',
+          en_revision: '<span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold">En Revisión</span>',
+          resuelto: '<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Resuelto</span>',
+          descartado: '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold">Descartado</span>'
+        };
+
+        const severityBadges = {
+          baja: '<span class="text-emerald-600 font-bold">Baja</span>',
+          media: '<span class="text-blue-600 font-bold">Media</span>',
+          alta: '<span class="text-amber-600 font-bold">Alta</span>',
+          critica: '<span class="text-rose-600 font-extrabold uppercase">Crítica</span>'
+        };
+
+        tableBodyBugs.innerHTML = list.map(b => `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="py-3 px-4 font-mono font-bold text-aero-blue">${b.ticketCode}</td>
+            <td class="py-3 px-4">${statusBadges[b.status] || b.status}</td>
+            <td class="py-3 px-4">${severityBadges[b.severity] || b.severity}</td>
+            <td class="py-3 px-4 font-medium text-slate-900 max-w-xs truncate" title="${b.title}">${b.title}</td>
+            <td class="py-3 px-4 text-slate-600">${b.enginePart}</td>
+            <td class="py-3 px-4 text-slate-500">${b.deviceInfo.device}</td>
+            <td class="py-3 px-4 text-slate-600">${b.reportedBy.name || 'Anónimo'}</td>
+            <td class="py-3 px-4 text-slate-400 font-mono text-[11px]">${new Date(b.createdAt).toLocaleDateString('es-ES')}</td>
+            <td class="py-3 px-4 text-right">
+              <button type="button" class="btn-inspect px-3 py-1 bg-slate-100 hover:bg-aero-blue hover:text-white rounded-lg text-slate-700 font-bold transition-all text-xs" data-id="${b.id}">
+                Gestionar &rarr;
+              </button>
+            </td>
+          </tr>
+        `).join('');
+
+        tableBodyBugs.querySelectorAll('.btn-inspect').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            openInspect(id);
+          });
+        });
+      }
+
+      function openInspect(id) {
+        const bug = bugs.find(b => b.id === id);
+        if (!bug) return;
+
+        activeBugId = id;
+        inspectCodeBadge.textContent = bug.ticketCode;
+        inspectTitle.textContent = bug.title;
+        inspectEngine.textContent = bug.enginePart;
+        inspectCategory.textContent = bug.categoryLabel || bug.category;
+        inspectDevice.textContent = `${bug.deviceInfo.device} (${bug.deviceInfo.os})`;
+        inspectReporter.textContent = `${bug.reportedBy.name || 'Anónimo'} ${bug.reportedBy.email ? `(${bug.reportedBy.email})` : ''}`;
+        inspectDescription.textContent = bug.description;
+        inspectSteps.textContent = bug.stepsToReproduce || 'No se detallaron pasos.';
+
+        if (bug.attachmentUrl) {
+          inspectAttachmentBox.classList.remove('hidden');
+          inspectImg.src = bug.attachmentUrl;
+        } else {
+          inspectAttachmentBox.classList.add('hidden');
+        }
+
+        inspectStatusSelect.value = bug.status;
+        inspectSeveritySelect.value = bug.severity;
+        inspectReplyInput.value = bug.adminReply || '';
+        inspectNotesInput.value = bug.adminNotes || '';
+
+        modalAdminInspect.classList.remove('hidden');
+      }
+
+      init();
+
+    })();
+  </script>
+</body>
+</html>

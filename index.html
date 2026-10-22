@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARIAE | Realidad Aumentada en la Enseñanza de Motores Aeronáuticos</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%231E3A8A'/><path d='M25 65 L50 25 L75 65 L50 52 Z' fill='white'/><circle cx='50' cy='50' r='12' fill='none' stroke='%2306B6D4' stroke-width='4'/></svg>">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            aero: {
+              950: '#070D18',
+              900: '#0F172A', // Aeronautical deep blue
+              800: '#1E293B',
+              blue: '#1E3A8A', // Core royal aeronautical blue
+              darkblue: '#172554',
+              cyan: '#06B6D4', // Tech accent cyan
+              sky: '#38BDF8',
+              lightcyan: '#ECFEFF',
+              surface: '#F8FAFC', // Crisp soft gray background
+              border: '#E2E8F0',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+          },
+          boxShadow: {
+            'aero': '0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04)',
+            'aero-glow': '0 0 30px rgba(6, 182, 212, 0.25)',
+            'aero-card': '0 4px 20px -2px rgba(15, 23, 42, 0.06)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom pulse & glow keyframes */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .animate-glow {
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spinSlow 12s linear infinite;
+    }
+    @keyframes flowParticles {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .animate-flow {
+      stroke-dasharray: 8 6;
+      animation: flowParticles 1.5s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-aero-surface text-slate-800 font-sans antialiased selection:bg-aero-cyan selection:text-aero-950">
+
+  <!-- ============================================================== -->
+  <!-- 1. ENCABEZADO Y NAVEGACIÓN (Navbar)                           -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all duration-300 shadow-sm" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo / Nombre del Proyecto -->
+        <a href="#inicio" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-aero-900 via-aero-blue to-aero-cyan flex items-center justify-center text-white shadow-md shadow-aero-blue/20 transition-transform duration-300 group-hover:scale-105">
+            <svg class="w-6 h-6 -rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-heading font-extrabold text-2xl tracking-tight text-aero-900 flex items-center gap-1.5">
+              ARIAE
+              <span class="text-[10px] font-bold uppercase tracking-wider text-aero-cyan bg-aero-cyan/10 border border-aero-cyan/30 px-2 py-0.5 rounded-full">
+                AR
+              </span>
+            </span>
+            <span class="text-[10px] font-semibold tracking-wider text-slate-500 uppercase -mt-1 hidden sm:block">
+              Motores Aeronáuticos
+            </span>
+          </div>
+        </a>
+
+        <!-- Menú de Navegación (Desktop) -->
+        <nav class="hidden lg:flex items-center space-x-8">
+          <a href="#inicio" class="text-sm font-semibold text-slate-700 hover:text-aero-blue transition-colors duration-200">
+            Inicio
+          </a>
+          <a href="#caracteristicas" class="text-sm font-semibold text-slate-700 hover:text-aero-blue transition-colors duration-200">
+            Características
+          </a>
+          <a href="#requisitos" class="text-sm font-semibold text-slate-700 hover:text-aero-blue transition-colors duration-200">
+            Requisitos
+          </a>
+          <a href="#autores" class="text-sm font-semibold text-slate-700 hover:text-aero-blue transition-colors duration-200">
+            Autores
+          </a>
+          <a href="#descarga" class="text-sm font-semibold text-slate-700 hover:text-aero-blue transition-colors duration-200">
+            Descarga
+          </a>
+        </nav>
+
+        <!-- CTA & Acceso a Reportes en Nueva Ventana -->
+        <div class="hidden sm:flex items-center gap-3">
+          <!-- Botón hacia soporte y reporte de bugs (abre en nueva pestaña/ventana) -->
+          <a href="soporte.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-aero-blue bg-aero-lightcyan/70 hover:bg-aero-cyan/20 border border-aero-cyan/40 rounded-full transition-all duration-200 hover:shadow-sm" title="Abre el centro de reportes y administración en una nueva ventana">
+            <svg class="w-3.5 h-3.5 text-aero-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 16v-4"/>
+              <path d="M12 8h.01"/>
+            </svg>
+            <span>Soporte & Reportes</span>
+            <svg class="w-3 h-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+
+          <!-- Botón de Descarga Rápida -->
+          <a href="#descarga" class="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white bg-aero-900 hover:bg-aero-blue rounded-full shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5">
+            <svg class="w-4 h-4 text-aero-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>Descargar APK</span>
+          </a>
+        </div>
+
+        <!-- Botón Menú Móvil -->
+        <div class="lg:hidden flex items-center gap-2">
+          <a href="soporte.html" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-aero-blue bg-cyan-50 border border-cyan-200 text-xs font-bold flex items-center gap-1" title="Reportes">
+            <span>Soporte</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+          <button id="mobileMenuBtn" type="button" class="p-2 rounded-lg text-slate-700 hover:text-aero-900 hover:bg-slate-100 focus:outline-none" aria-label="Abrir menú">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="6" x2="20" y2="6"/>
+              <line x1="4" y1="12" x2="20" y2="12"/>
+              <line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2">
+      <a href="#inicio" class="block px-3 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-aero-blue">Inicio</a>
+      <a href="#caracteristicas" class="block px-3 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-aero-blue">Características</a>
+      <a href="#requisitos" class="block px-3 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-aero-blue">Requisitos</a>
+      <a href="#autores" class="block px-3 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-aero-blue">Autores</a>
+      <a href="#descarga" class="block px-3 py-2.5 rounded-lg text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-aero-blue">Descarga</a>
+      <div class="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
+        <a href="soporte.html" target="_blank" rel="noopener noreferrer" class="w-full text-center py-2.5 px-4 text-sm font-bold text-aero-blue bg-cyan-50 border border-cyan-200 rounded-full flex items-center justify-center gap-2">
+          <span>Abrir Soporte & Reportes</span>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
+        <a href="#descarga" class="w-full text-center py-2.5 px-4 text-sm font-bold text-white bg-aero-900 rounded-full shadow-sm">
+          Descargar APK
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. SECCIÓN PRINCIPAL (Hero Section)                           -->
+  <!-- ============================================================== -->
+  <section id="inicio" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-32 bg-gradient-to-b from-white via-slate-50 to-aero-surface">
+    
+    <!-- Elementos decorativos de fondo -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-tr from-aero-blue/10 via-aero-cyan/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+    <div class="absolute -top-32 right-10 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Columna de Texto & Llamados a la Acción -->
+        <div class="lg:col-span-7 text-center lg:text-left">
+          
+          <!-- Badge Académico y Tecnológico -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200/80 text-aero-blue text-xs font-bold tracking-wide uppercase mb-6 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-aero-cyan animate-pulse"></span>
+            <span>Realidad Aumentada &bull; Unity 6 &bull; Vuforia Engine</span>
+          </div>
+
+          <!-- Título Principal -->
+          <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-aero-950 tracking-tight leading-[1.15] mb-6">
+            ARIAE &mdash; Realidad Aumentada en la Enseñanza de Motores Aeronáuticos
+          </h1>
+
+          <!-- Subtítulo -->
+          <p class="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8 font-normal">
+            Explora, despieza y comprende el funcionamiento dinámico de un motor turbofán en 3D desde tu dispositivo Android mediante Realidad Aumentada.
+          </p>
+
+          <!-- Botones de Acción (CTA) -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+            <!-- Botón Principal Destacado -->
+            <a href="#descarga" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-aero-900 to-aero-blue hover:from-aero-blue hover:to-aero-darkblue rounded-full shadow-lg shadow-aero-blue/25 hover:shadow-aero-glow transition-all duration-300 transform hover:-translate-y-0.5">
+              <svg class="w-5 h-5 text-aero-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Descargar APK</span>
+            </a>
+
+            <!-- Botón Secundario -->
+            <a href="#marcador" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-7 py-4 text-sm font-bold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 rounded-full shadow-sm hover:shadow transition-all duration-300 transform hover:-translate-y-0.5">
+              <svg class="w-5 h-5 text-aero-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <line x1="3" y1="9" x2="21" y2="9"/>
+                <line x1="9" y1="21" x2="9" y2="9"/>
+              </svg>
+              <span>Ver Manual / Marcador AR</span>
+            </a>
+          </div>
+
+          <!-- Micro Metadatos Institucionales -->
+          <div class="pt-6 border-t border-slate-200/80 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-500 font-medium">
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Facultad Politécnica (FP-UNA)
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-aero-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              Simulación de Fluidos a 30 FPS
+            </span>
+            <span class="flex items-center gap-2">
+              <a href="soporte.html" target="_blank" rel="noopener noreferrer" class="text-aero-blue hover:text-aero-cyan underline flex items-center gap-1 font-semibold">
+                ¿Problemas técnicos? Centro de soporte ↗
+              </a>
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Columna Visual: Maqueta / Mockup de Smartphone con Proyección 3D AR -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-[340px] sm:max-w-[360px]">
+            
+            <!-- Resplandor tecnológico posterior -->
+            <div class="absolute -inset-4 bg-gradient-to-tr from-aero-blue/30 via-aero-cyan/30 to-sky-400/20 rounded-[48px] blur-2xl -z-10 animate-glow"></div>
+
+            <!-- Chasis del Smartphone Simulado -->
+            <div class="relative bg-slate-900 p-3.5 rounded-[44px] shadow-2xl border-4 border-slate-800 ring-1 ring-slate-700/50">
+              
+              <!-- Altavoz & Cámara Frontal (Punch-hole) -->
+              <div class="absolute top-7 left-1/2 -translate-x-1/2 w-20 h-4 bg-slate-950 rounded-full z-30 flex items-center justify-center">
+                <div class="w-2.5 h-2.5 bg-slate-900 rounded-full border border-slate-700"></div>
+              </div>
+
+              <!-- Pantalla del Teléfono (Viewport AR) -->
+              <div class="relative bg-slate-950 rounded-[34px] overflow-hidden border border-slate-800 text-white min-h-[580px] flex flex-col justify-between p-4">
+                
+                <!-- HUD Superior AR -->
+                <div class="relative z-20 pt-7 flex items-center justify-between text-[11px] font-mono">
+                  <div class="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-cyan-500/30 text-cyan-300 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>VUFORIA AR: LOCK</span>
+                  </div>
+                  <div class="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-slate-700 text-slate-300">
+                    FPS: 30
+                  </div>
+                </div>
+
+                <!-- Escenario Holográfico 3D (SVG Turbofán Flotando sobre el Marcador) -->
+                <div class="relative my-auto py-6 flex flex-col items-center justify-center">
+                  
+                  <!-- Turbina Holográfica Proyectada -->
+                  <div class="relative w-full max-w-[270px]">
+                    <svg viewBox="0 0 320 200" class="w-full drop-shadow-[0_10px_20px_rgba(6,182,212,0.4)]">
+                      <defs>
+                        <!-- Gradientes térmicos y metálicos -->
+                        <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#38BDF8"/>
+                          <stop offset="100%" stop-color="#0369A1"/>
+                        </linearGradient>
+                        <linearGradient id="flameGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8"/>
+                          <stop offset="40%" stop-color="#F97316" stop-opacity="0.9"/>
+                          <stop offset="85%" stop-color="#EF4444" stop-opacity="0.95"/>
+                        </linearGradient>
+                      </defs>
+
+                      <!-- Flujo de Partículas Animado (Brayton Flow) -->
+                      <path d="M 40 100 Q 140 95 280 100" fill="none" stroke="url(#flameGrad)" stroke-width="28" stroke-linecap="round" opacity="0.6" class="animate-flow"/>
+                      <path d="M 40 70 Q 140 65 280 75" fill="none" stroke="url(#flameGrad)" stroke-width="12" stroke-linecap="round" opacity="0.4" class="animate-flow"/>
+                      <path d="M 40 130 Q 140 135 280 125" fill="none" stroke="url(#flameGrad)" stroke-width="12" stroke-linecap="round" opacity="0.4" class="animate-flow"/>
+
+                      <!-- Carcasa Exterior del Turbofán (Nacelle Cutaway) -->
+                      <path d="M 30 40 Q 120 20 220 25 L 210 42 Q 130 38 45 52 Z" fill="#334155" stroke="#64748B" stroke-width="1.5"/>
+                      <path d="M 30 160 Q 120 180 220 175 L 210 158 Q 130 162 45 148 Z" fill="#334155" stroke="#64748B" stroke-width="1.5"/>
+
+                      <!-- Fan Frontal (Álabes) -->
+                      <g class="animate-spin-slow origin-[50px_100px]">
+                        <ellipse cx="50" cy="100" rx="10" ry="58" fill="url(#bladeGrad)" stroke="#E0F2FE" stroke-width="1.5"/>
+                        <line x1="50" y1="45" x2="50" y2="155" stroke="#FFFFFF" stroke-width="2" opacity="0.7"/>
+                        <circle cx="50" cy="100" r="14" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
+                      </g>
+
+                      <!-- Eje N1 y N2 con Compresor Axial -->
+                      <rect x="70" y="70" width="45" height="60" rx="4" fill="#475569" stroke="#94A3B8" stroke-width="1"/>
+                      <line x1="82" y1="72" x2="82" y2="128" stroke="#38BDF8" stroke-width="2"/>
+                      <line x1="96" y1="72" x2="96" y2="128" stroke="#38BDF8" stroke-width="2"/>
+
+                      <!-- Cámara de Combustión -->
+                      <rect x="122" y="74" width="30" height="52" rx="4" fill="#EA580C" opacity="0.9" stroke="#FDBA74"/>
+                      <circle cx="137" cy="88" r="4" fill="#FEF08A"/>
+                      <circle cx="137" cy="112" r="4" fill="#FEF08A"/>
+
+                      <!-- Turbina de Alta y Baja Presión -->
+                      <rect x="160" y="72" width="22" height="56" rx="3" fill="#DC2626" stroke="#FCA5A5"/>
+                      <rect x="186" y="68" width="22" height="64" rx="3" fill="#0284C7" stroke="#7DD3FC"/>
+
+                      <!-- Tobera de Escape -->
+                      <polygon points="210,80 260,90 260,110 210,120" fill="#1E293B" stroke="#475569"/>
+
+                      <!-- Etiquetas Holográficas Flotantes -->
+                      <g>
+                        <circle cx="50" cy="35" r="3" fill="#06B6D4"/>
+                        <line x1="50" y1="35" x2="80" y2="15" stroke="#06B6D4" stroke-width="1"/>
+                        <rect x="80" y="7" width="60" height="16" rx="3" fill="rgba(15,23,42,0.8)" stroke="#06B6D4" stroke-width="0.7"/>
+                        <text x="110" y="18" fill="#38BDF8" font-size="8" font-family="sans-serif" font-weight="bold" text-anchor="middle">FAN TITANIO</text>
+                      </g>
+                    </svg>
+                  </div>
+
+                  <!-- Marcador Físico AR Impreso en el Suelo (Image Target) -->
+                  <div class="relative mt-2 w-48 h-16 bg-slate-900/90 border-2 border-dashed border-cyan-400/80 rounded-xl flex items-center justify-center transform perspective-500 rotate-x-60 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+                    <div class="flex items-center gap-2 text-cyan-300 font-mono text-[10px] font-bold">
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                      </svg>
+                      <span>[IMAGE TARGET ARIAE]</span>
+                    </div>
+                    <!-- Puntos de Tracking Vuforia -->
+                    <span class="absolute -top-1 -left-1 w-2 h-2 bg-cyan-400 rounded-full"></span>
+                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-cyan-400 rounded-full"></span>
+                    <span class="absolute -bottom-1 -left-1 w-2 h-2 bg-cyan-400 rounded-full"></span>
+                    <span class="absolute -bottom-1 -right-1 w-2 h-2 bg-cyan-400 rounded-full"></span>
+                  </div>
+
+                </div>
+
+                <!-- HUD Inferior con Botones Interactivos de la App -->
+                <div class="relative z-20 space-y-2">
+                  <div class="grid grid-cols-3 gap-1.5 text-center text-[10px] font-bold">
+                    <div class="bg-cyan-500 text-slate-950 py-1.5 px-1 rounded-lg">
+                      Despiece
+                    </div>
+                    <div class="bg-slate-800/90 text-cyan-300 py-1.5 px-1 rounded-lg border border-slate-700">
+                      N1 / N2
+                    </div>
+                    <div class="bg-slate-800/90 text-slate-300 py-1.5 px-1 rounded-lg border border-slate-700">
+                      Voz IA
+                    </div>
+                  </div>
+                  <div class="text-center text-[9px] text-slate-400 font-mono">
+                    Apuntando a marcador físico &bull; 100% Calibrado
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 3. CARACTERÍSTICAS Y MODOS PRINCIPALES DE LA APP              -->
+  <!-- ============================================================== -->
+  <section id="caracteristicas" class="py-20 lg:py-28 bg-white border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Encabezado de la Sección -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-aero-cyan bg-cyan-50 border border-cyan-200 px-3 py-1 rounded-full mb-3">
+          Experiencia Interactiva en 3D
+        </span>
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-aero-950 tracking-tight">
+          Características y Modos Principales de la App
+        </h2>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+          ARIAE integra tres modos pedagógicos especializados para transformar conceptos abstractos de propulsión aeronáutica en conocimiento práctico y tangible.
+        </p>
+      </div>
+
+      <!-- Cuadrícula de 3 Tarjetas (Cards) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- CARD 1: Modo Despiece -->
+        <div class="group bg-aero-surface hover:bg-white rounded-3xl p-8 border border-slate-200 hover:border-aero-cyan/40 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-aero-900 to-aero-blue text-white flex items-center justify-center shadow-md shadow-aero-blue/20 mb-6 group-hover:scale-105 transition-transform">
+              <svg class="w-7 h-7 text-aero-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+              </svg>
+            </div>
+            <div class="text-xs font-bold uppercase tracking-wider text-aero-cyan mb-2">Modo 01 &bull; Desensamble Virtual</div>
+            <h3 class="font-heading font-bold text-xl text-aero-950 mb-3">
+              Modo Despiece
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+              Permite separar virtualmente en 3D los componentes internos y externos (álabes, compresor, cámara de combustión, turbinas) con opción de reinicio/ensamblado y explicaciones auditivas.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-slate-200/80 flex items-center justify-between text-xs font-bold text-aero-900">
+            <span class="flex items-center gap-1.5 text-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Separación Progresiva
+            </span>
+            <span class="text-aero-blue font-mono">Audio Sync</span>
+          </div>
+        </div>
+
+        <!-- CARD 2: Modo Funcionamiento -->
+        <div class="group bg-aero-surface hover:bg-white rounded-3xl p-8 border border-slate-200 hover:border-aero-cyan/40 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-600 to-aero-blue text-white flex items-center justify-center shadow-md shadow-cyan-500/20 mb-6 group-hover:scale-105 transition-transform">
+              <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <div class="text-xs font-bold uppercase tracking-wider text-cyan-600 mb-2">Modo 02 &bull; Dinámica & Fluidos</div>
+            <h3 class="font-heading font-bold text-xl text-aero-950 mb-3">
+              Modo Funcionamiento
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+              Simulación animada de los conjuntos rotativos N1 y N2, representación del flujo de aire y gases mediante sistemas de partículas (admisión, compresión, combustión, expansión y escape) sincronizado con audio educativo.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-slate-200/80 flex items-center justify-between text-xs font-bold text-aero-900">
+            <span class="flex items-center gap-1.5 text-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              Conjuntos N1 / N2
+            </span>
+            <span class="text-cyan-600 font-mono">Partículas CFD</span>
+          </div>
+        </div>
+
+        <!-- CARD 3: Modo Información -->
+        <div class="group bg-aero-surface hover:bg-white rounded-3xl p-8 border border-slate-200 hover:border-aero-cyan/40 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-slate-900 to-aero-950 text-white flex items-center justify-center shadow-md shadow-slate-900/20 mb-6 group-hover:scale-105 transition-transform">
+              <svg class="w-7 h-7 text-aero-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="text-xs font-bold uppercase tracking-wider text-aero-blue mb-2">Modo 03 &bull; Tutoría Asistida</div>
+            <h3 class="font-heading font-bold text-xl text-aero-950 mb-3">
+              Modo Información
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+              Selección táctil de partes individuales con etiquetas explicativas y locución con síntesis de voz mediante Inteligencia Artificial para el estudio guiado.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-slate-200/80 flex items-center justify-between text-xs font-bold text-aero-900">
+            <span class="flex items-center gap-1.5 text-slate-700">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              Inspección Táctil
+            </span>
+            <span class="text-aero-blue font-mono">Síntesis IA</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 4. REQUISITOS TÉCNICOS DEL SISTEMA                            -->
+  <!-- ============================================================== -->
+  <section id="requisitos" class="py-20 lg:py-28 bg-aero-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-aero-blue bg-blue-50 border border-blue-200 px-3 py-1 rounded-full mb-3">
+          Especificaciones de Ejecución
+        </span>
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-aero-950 tracking-tight">
+          Requisitos Técnicos del Sistema
+        </h2>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+          Consulta las especificaciones de hardware y conectividad indispensables para el óptimo anclaje y renderizado óptico en tu dispositivo.
+        </p>
+      </div>
+
+      <!-- Tarjetas de Especificaciones Técnicas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        
+        <!-- Requisito 1: SO -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+              <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+          </div>
+          <h4 class="font-heading font-bold text-base text-aero-950 mb-1">Sistema Operativo</h4>
+          <p class="text-sm font-semibold text-emerald-600 mb-2">Android 11.0 o superior</p>
+          <p class="text-xs text-slate-500 leading-relaxed mt-auto">
+            Compatibilidad con arquitectura ARM64 y servicios actualizados de Google Play.
+          </p>
+        </div>
+
+        <!-- Requisito 2: Hardware / Cámara -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col">
+          <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+          </div>
+          <h4 class="font-heading font-bold text-base text-aero-950 mb-1">Hardware Requerido</h4>
+          <p class="text-sm font-semibold text-cyan-600 mb-2">Cámara Trasera Funcional</p>
+          <p class="text-xs text-slate-500 leading-relaxed mt-auto">
+            Indispensable para el tracking óptico y detección de puntos característicos con Vuforia Engine.
+          </p>
+        </div>
+
+        <!-- Requisito 3: Conectividad -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+              <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+              <line x1="12" y1="20" x2="12.01" y2="20"/>
+            </svg>
+          </div>
+          <h4 class="font-heading font-bold text-base text-aero-950 mb-1">Conectividad</h4>
+          <p class="text-sm font-semibold text-blue-600 mb-2">Conexión Activa a Internet</p>
+          <p class="text-xs text-slate-500 leading-relaxed mt-auto">
+            Requerida para la verificación de licencia educativa e inicio inicial de la aplicación.
+          </p>
+        </div>
+
+        <!-- Requisito 4: Accesorio Obligatorio -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          <h4 class="font-heading font-bold text-base text-aero-950 mb-1">Accesorio Obligatorio</h4>
+          <p class="text-sm font-semibold text-amber-600 mb-2">Marcador Físico Impreso</p>
+          <p class="text-xs text-slate-500 leading-relaxed mt-auto">
+            Image Target impreso en papel o cartulina para el anclaje del modelo 3D en la cámara.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Tarjeta de Recomendaciones Técnicas de Rendimiento -->
+      <div class="bg-gradient-to-r from-aero-900 to-aero-blue text-white rounded-2xl p-6 sm:p-8 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-start gap-4">
+          <div class="p-3 bg-white/10 rounded-xl text-aero-cyan shrink-0">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-heading font-bold text-lg text-white mb-1">
+              Recomendaciones para la Mejor Experiencia de Usuario:
+            </h4>
+            <p class="text-sm text-slate-200 leading-relaxed max-w-3xl">
+              Buena iluminación ambiental (evitar reflejos extremos), batería suficiente (desactivar modo de ahorro de energía) y memoria RAM adecuada para renderizado 3D fluido a 30 FPS.
+            </p>
+          </div>
+        </div>
+        <a href="#marcador" class="shrink-0 px-5 py-2.5 bg-white text-aero-900 hover:bg-aero-lightcyan text-xs font-bold uppercase tracking-wider rounded-full transition-colors shadow-sm">
+          Descargar Marcador PDF
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 5. AUTORES Y CRÉDITOS ACADÉMICOS                              -->
+  <!-- ============================================================== -->
+  <section id="autores" class="py-20 lg:py-28 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-aero-blue bg-blue-50 border border-blue-200 px-3 py-1 rounded-full mb-3">
+          Investigación y Desarrollo
+        </span>
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-aero-950 tracking-tight">
+          Autores y Créditos Académicos
+        </h2>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+          Trabajo Final de Grado desarrollado en el marco de la carrera de Ingeniería en Aeronáutica en la Universidad Nacional de Asunción.
+        </p>
+      </div>
+
+      <!-- Tarjeta Institucional Central -->
+      <div class="bg-aero-surface rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-sm mb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Sello Institucional FP-UNA -->
+          <div class="lg:col-span-4 text-center lg:text-left border-b lg:border-b-0 lg:border-r border-slate-200 pb-8 lg:pb-0 lg:pr-8">
+            <div class="w-16 h-16 rounded-2xl bg-aero-blue text-white flex items-center justify-center font-heading font-extrabold text-2xl mx-auto lg:mx-0 mb-4 shadow-md shadow-aero-blue/20">
+              UNA
+            </div>
+            <h3 class="font-heading font-bold text-xl text-aero-950 mb-1">
+              Facultad Politécnica
+            </h3>
+            <p class="text-sm font-semibold text-aero-blue mb-2">
+              Universidad Nacional de Asunción (FP-UNA)
+            </p>
+            <p class="text-xs text-slate-500">
+              San Lorenzo &mdash; República del Paraguay
+            </p>
+            <div class="mt-4 inline-block px-3 py-1 bg-slate-200 text-slate-700 text-xs font-bold rounded-md">
+              Ingeniería en Aeronáutica
+            </div>
+          </div>
+
+          <!-- Autores y Orientadores -->
+          <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            
+            <!-- Bloque de Autores -->
+            <div>
+              <h4 class="text-xs font-extrabold uppercase tracking-widest text-aero-cyan mb-4 flex items-center gap-2">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+                Autores de la Investigación:
+              </h4>
+              <ul class="space-y-4">
+                <li class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+                  <p class="font-heading font-bold text-slate-900 text-sm">
+                    Jazmín Raquel Arguello Villalba
+                  </p>
+                  <p class="text-xs text-slate-500 font-medium">
+                    Ingeniería en Aeronáutica &bull; FP-UNA
+                  </p>
+                </li>
+                <li class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+                  <p class="font-heading font-bold text-slate-900 text-sm">
+                    Jesús Felipe Nery Bobadilla
+                  </p>
+                  <p class="text-xs text-slate-500 font-medium">
+                    Ingeniería en Aeronáutica &bull; FP-UNA
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Bloque de Orientadores -->
+            <div>
+              <h4 class="text-xs font-extrabold uppercase tracking-widest text-aero-blue mb-4 flex items-center gap-2">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+                Orientadores Académicos:
+              </h4>
+              <ul class="space-y-4">
+                <li class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+                  <p class="font-heading font-bold text-slate-900 text-sm">
+                    Prof. Ing. Adolfo Javier Jara Céspedes, Mst. Ph.D.
+                  </p>
+                  <p class="text-xs text-aero-blue font-semibold">
+                    Tutor Técnico
+                  </p>
+                </li>
+                <li class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+                  <p class="font-heading font-bold text-slate-900 text-sm">
+                    Prof. Ing. María Soledad Ayala Rodríguez, Mst.
+                  </p>
+                  <p class="text-xs text-aero-blue font-semibold">
+                    Asesora Metodológica
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Tecnologías Clave Empleadas -->
+      <div class="text-center">
+        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">
+          Tecnologías Clave Empleadas en el Desarrollo
+        </h4>
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          
+          <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-800 text-xs font-bold shadow-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+            <span>Unity 6</span>
+          </div>
+
+          <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-50 border border-cyan-200 text-cyan-900 text-xs font-bold shadow-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-aero-cyan"></span>
+            <span>Vuforia Engine</span>
+          </div>
+
+          <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 text-xs font-bold shadow-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
+            <span>Lenguaje C# (.NET)</span>
+          </div>
+
+          <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold shadow-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+            <span>Blender 3D Modeling</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 6. SECCIÓN DE DESCARGA / LLAMADO A LA ACCIÓN FINAL            -->
+  <!-- ============================================================== -->
+  <section id="descarga" class="py-20 lg:py-28 bg-gradient-to-b from-aero-950 via-aero-900 to-aero-darkblue text-white relative overflow-hidden">
+    
+    <!-- Elementos luminosos de fondo -->
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-aero-cyan/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      
+      <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-aero-cyan bg-cyan-500/10 border border-cyan-500/30 px-3.5 py-1.5 rounded-full mb-6">
+        Disponibilidad Inmediata &bull; Formato APK Android
+      </span>
+
+      <!-- Título de Cierre -->
+      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-6">
+        "Lleva el laboratorio de motores a la palma de tu mano"
+      </h2>
+
+      <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">
+        Descarga la aplicación educativa ARIAE para tu smartphone o tablet Android y obtén el archivo PDF del marcador listo para imprimir.
+      </p>
+
+      <!-- Botones de Acción de Descarga -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-5 max-w-xl mx-auto mb-14" id="marcador">
+        
+        <!-- Botón 1: Descargar APK -->
+        <a href="#descarga" onclick="alert('🛫 Descargando ARIAE_v1.2.0_FPUNA.apk (Android 11+)');" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-aero-950 bg-aero-cyan hover:bg-cyan-300 rounded-full shadow-lg shadow-cyan-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Descargar Aplicación (.APK)</span>
+        </a>
+
+        <!-- Botón 2: Descargar PDF del Marcador -->
+        <a href="#marcador" onclick="alert('📄 Descargando Marcador_ImageTarget_ARIAE_Listo_Para_Imprimir.pdf');" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 text-sm font-bold text-white bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-full shadow transition-all duration-300 transform hover:-translate-y-0.5">
+          <svg class="w-5 h-5 text-aero-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <span>Descargar Marcador AR (PDF)</span>
+        </a>
+
+      </div>
+
+      <!-- Llamado al Centro de Reportes & Soporte (Abre en Nueva Ventana) -->
+      <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-3 py-3 px-6 rounded-2xl bg-white/5 border border-white/10 text-xs text-slate-300">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          ¿Detectaste algún error de renderizado o tracking en tu dispositivo?
+        </span>
+        <a href="soporte.html" target="_blank" rel="noopener noreferrer" class="font-bold text-aero-cyan hover:underline flex items-center gap-1">
+          <span>Abrir Centro de Reportes & Bugs (Nueva Ventana)</span>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 7. PIE DE PÁGINA (Footer)                                     -->
+  <!-- ============================================================== -->
+  <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-900">
+        
+        <!-- Logo en Footer -->
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-aero-blue text-white flex items-center justify-center font-bold text-sm">
+            AR
+          </div>
+          <div>
+            <span class="font-heading font-extrabold text-xl text-white tracking-tight">ARIAE</span>
+            <p class="text-xs text-slate-500">Realidad Aumentada en Motores Aeronáuticos</p>
+          </div>
+        </div>
+
+        <!-- Enlaces Rápidos de Navegación -->
+        <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-slate-400">
+          <a href="#inicio" class="hover:text-white transition-colors">Inicio</a>
+          <a href="#caracteristicas" class="hover:text-white transition-colors">Características</a>
+          <a href="#requisitos" class="hover:text-white transition-colors">Requisitos</a>
+          <a href="#autores" class="hover:text-white transition-colors">Autores</a>
+          <a href="#descarga" class="hover:text-white transition-colors">Descarga</a>
+          <a href="soporte.html" target="_blank" rel="noopener noreferrer" class="text-aero-cyan hover:underline flex items-center gap-1 font-bold">
+            Portal de Soporte y Reportes ↗
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Información Legal y Académica -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 text-center sm:text-left">
+        <p>
+          &copy; 2026 ARIAE &mdash; Trabajo Final de Grado.
+        </p>
+        <p class="text-slate-400 font-medium">
+          Universidad Nacional de Asunción &mdash; Facultad Politécnica (FP-UNA)
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Script para el menú móvil -->
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      const links = mobileMenu.querySelectorAll('a');
+      links.forEach(l => {
+        l.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      });
+    }
+  </script>
+</body>
+</html>
